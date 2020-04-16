@@ -1,5 +1,6 @@
 package co.dsproject.gestor
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -37,6 +38,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                     if(task.isSuccessful){
                         val user = auth.currentUser
                         Toast.makeText(this, "Autenticación Exitosa", Toast.LENGTH_SHORT).show()
+                        val goToMainActivity = Intent(this, MainActivity::class.java)
+                        startActivity(goToMainActivity)
                     } else{
                         Toast.makeText(baseContext, "Authentication failed.", Toast.LENGTH_SHORT).show()
                     }
