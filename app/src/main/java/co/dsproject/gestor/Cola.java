@@ -20,9 +20,7 @@ private NodeGeneric<T> front, rear;
         rear=newp;
     }
 
-    public boolean empty() {
-        return (front == null);
-    }
+    public boolean empty() { return (front == null); }
 
     public T dequeue(){
         T item =null;
