@@ -3,6 +3,7 @@ package co.dsproject.gestor
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -33,6 +34,10 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun sigIn(email: String, password: String ){
+        if (!validateForm()) {
+            return
+        }
+
         auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this){ task ->  
                     if(task.isSuccessful){
@@ -45,6 +50,28 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                     }
                 }
 
+    }
+
+    private fun validateForm(): Boolean {
+        var valid = true
+
+        val email = fieldEmail.text.toString()
+        if (TextUtils.isEmpty(email)) {
+            fieldEmail.error = "Requerido."
+            valid = false
+        } else {
+            fieldEmail.error = null
+        }
+
+        val password = fieldPassword.text.toString()
+        if (TextUtils.isEmpty(password)) {
+            fieldPassword.error = "Requerido."
+            valid = false
+        } else {
+            fieldPassword.error = null
+        }
+
+        return valid
     }
 
     override fun onClick(v: View?) {
