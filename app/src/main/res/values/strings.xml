@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Gestor</string>
+    <string name="email_text">Correo electrónico</string>
+    <string name="password">Contraseña</string>
+    <string name="login">Iniciar sesión</string>
+    <string name="register">Registrarse</string>
 </resources>
