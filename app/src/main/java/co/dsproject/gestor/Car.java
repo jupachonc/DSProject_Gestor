@@ -1,8 +1,8 @@
 package co.dsproject.gestor;
 
 import java.util.Date;
-
-public class Car {
+import java.lang.Integer;
+public class Car implements Comparable<Car> {
 
     private String owner;
     private String placa;
@@ -16,7 +16,7 @@ public class Car {
     private Date poliza;
     private Date impuesto;
 
-    Car(String owner, String placa, String marca, String linea, int modelo, Date ulltimo_mantenimiento,
+    public Car(String owner, String placa, String marca, String linea, int modelo, Date ulltimo_mantenimiento,
         int frecuencia_mantenimiento, Date soat, Date rtm, Date poliza, Date impuesto){
         this.owner = owner;
         this.placa = placa;
@@ -31,5 +31,15 @@ public class Car {
         this.impuesto = impuesto;
     }
 
+    public Car(){
+        this(null,null,null,null,0, null,0,null,null,null,null);
+    }
 
+
+    @Override
+    public int compareTo(Car o) {
+        int compare = 0;
+        compare += this.placa.compareTo(o.placa);
+        return compare;
+    }
 }
