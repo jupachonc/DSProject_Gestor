@@ -1,36 +1,29 @@
 package co.dsproject.gestor;
 
-public class Pila<T> {
-
-    private NodeGeneric<T> next;
-    private int top;
+public class Pila<T extends Comparable> {
+    private DoubleNode<T> top;
 
     public Pila() {
-        top=0;
+        top = null;
     }
 
     public boolean empty() {
-        return (top == 0);
+        return (top == null);
     }
-    public void pop2(){
-        this.next=null;
-        this.top=0;
-    }
+
     public void push(T data){
-        next= new NodeGeneric<T> (data);
-        top++;
+        DoubleNode next = new DoubleNode<T>(data);
+        if (top != null) {
+            top.setNext(next);
+            next.setBack(top);
+        }
+        top = next;
 
     }
     public T pop(){
-        if(empty()){
-            throw new RuntimeException("Stack is empty");
-        }
-        T data=next.getData();
-        next=next.getNext();
-        top--;
-        if (top==0){
-            pop2();
-        }
+        if(empty()) throw new RuntimeException("Stack is empty");
+        T data = top.getData();
+        top = top.getBack();
         return data;
     }
 }

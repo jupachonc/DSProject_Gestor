@@ -1,23 +1,23 @@
 package co.dsproject.gestor;
 
-public class Cola<T> {
+public class Cola<T extends Comparable> {
 
 private NodeGeneric<T> front, rear;
 
     public Cola(){
-        front=null;
-        rear=null;
+        front = null;
+        rear = null;
     }
 
     public void enqueue(T item ){
-        NodeGeneric<T> newp= new NodeGeneric<T> (item);
-        if(rear!=null){
+        NodeGeneric<T> newp= new NodeGeneric<T>(item);
+        if(rear != null){
             rear.setNext(newp);
         }
         else{
-            front=newp;
+            front = newp;
         }
-        rear=newp;
+        rear = newp;
     }
 
     public boolean empty() { return (front == null); }
@@ -25,8 +25,8 @@ private NodeGeneric<T> front, rear;
     public T dequeue(){
         T item =null;
         if(!empty()){
-           item=front.getData();
-           front=front.getNext();
+           item = front.getData();
+           front = front.getNext();
         }
         return item;
 
