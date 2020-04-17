@@ -22,7 +22,7 @@ public class Lista<T extends Comparable<T>> {
             ptr = ptr.getNext();
         }
 
-        if(ptr == null && !(ptr.getData().equals(item))){
+        if(ptr == null && !(prev.getData().equals(item))){
             inserted = true;
             NodeGeneric<T> newNode = new NodeGeneric();
             newNode.setData(item);
