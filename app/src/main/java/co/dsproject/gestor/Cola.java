@@ -31,10 +31,7 @@ private NodeGeneric<T> front, rear;
         return item;
 
     }
-
-
 }
-
 //public int dequeue() {
 //int item=-1;
 //if(!empty()){
