@@ -4,7 +4,7 @@ import org.w3c.dom.Node;
 
 public class Lista<T extends Comparable<T>> {
 
-    private NodeGeneric<T> head;
+    private DoubleNode<T> head;
 
     public Lista(){
         head = null;
@@ -13,48 +13,57 @@ public class Lista<T extends Comparable<T>> {
     public boolean insert(T item){
 
         boolean inserted;
-        NodeGeneric<T> ptr, prev;
+        DoubleNode<T> ptr, NodeI;
         inserted = false;
         ptr = head;
-        prev = null;
-        while(ptr != null && ptr.getData().compareTo(item) < 0){
-            prev = ptr;
+        while(ptr != null && ptr.getNext() != null && !ptr.getData().equals(item)){
             ptr = ptr.getNext();
         }
-
-        if(ptr == null && !(prev.getData().equals(item))){
+        DoubleNode newi = new DoubleNode(item);
+        if(ptr == null){
             inserted = true;
-            NodeGeneric<T> newNode = new NodeGeneric();
-            newNode.setData(item);
-            newNode.setNext(ptr);
-            if(prev == null)
-                head = newNode;
-            else
-                prev.setNext(newNode);
+            head = newi;
+        }else{
+            if(!ptr.getData().equals(item)){
+                inserted = true;
+                ptr.setNext(newi);
+                newi.setBack(ptr);
+            }
         }
+
         return  inserted;
     }
 
     public boolean delete(T item){
 
         boolean deleted;
-        NodeGeneric<T> ptr, prev;
+        DoubleNode<T> ptr;
         deleted = false;
         ptr = head;
-        prev = null;
 
         while(ptr != null && !ptr.getData().equals(item)){
-            prev = ptr;
             ptr = ptr.getNext();
         }
-        if(ptr != null && ptr.getData().equals(item)){
+        if(ptr != null){
             deleted = true;
-            prev.setNext(ptr.getNext());
+            if(ptr.getBack() != null && ptr.getNext() != null){
+                ptr.getBack().setNext(ptr.getNext());
+                ptr.getNext().setBack(ptr.getBack());
+            }else if(ptr.getBack() == null && ptr.getNext() != null){
+                head = ptr.getNext();
+                ptr.getNext().setBack(null);
+            }else if(ptr.getNext() == null && ptr.getBack() != null){
+                ptr.getBack().setNext(null);
+            }else{
+                head = null;
+            }
+
         }
         return deleted;
     }
 
 
-
-
+    public DoubleNode<T> getHead() {
+        return head;
+    }
 }
