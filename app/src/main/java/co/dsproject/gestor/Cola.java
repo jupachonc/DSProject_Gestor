@@ -23,7 +23,7 @@ private NodeGeneric<T> front, rear;
     public boolean empty() { return (front == null); }
 
     public T dequeue(){
-        T item =null;
+        T item = null;
         if(!empty()){
            item = front.getData();
            front = front.getNext();
