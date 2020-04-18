@@ -16,6 +16,11 @@
             app:destination="@id/nav_home_second" />
     </fragment>
     <fragment
+        android:id="@+id/nav_cars"
+        android:name="co.dsproject.gestor.ui.cars.CarsFragment"
+        android:label="@string/menu_cars"
+        tools:layout="@layout/cars_fragment" />
+    <fragment
         android:id="@+id/nav_home_second"
         android:name="co.dsproject.gestor.ui.home.HomeSecondFragment"
         android:label="@string/home_second"
