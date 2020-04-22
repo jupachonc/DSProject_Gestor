@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_cars"
-        android:name="co.dsproject.gestor.ui.cars.CarsFragment"
+        android:name="co.dsproject.gestor.cars"
         android:label="@string/menu_cars"
         tools:layout="@layout/cars_fragment" />
     <fragment
