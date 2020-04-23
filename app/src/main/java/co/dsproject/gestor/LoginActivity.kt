@@ -15,6 +15,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var auth: FirebaseAuth
     private lateinit var fieldEmail :EditText
     private lateinit var fieldPassword: EditText
+    lateinit var uid: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +26,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         fieldPassword = findViewById<EditText>(R.id.password)
 
         auth = FirebaseAuth.getInstance()
+
     }
 
     override fun onStart() {
@@ -44,6 +46,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                         val user = auth.currentUser
                         Toast.makeText(this, "Autenticación Exitosa", Toast.LENGTH_SHORT).show()
                         val goToMainActivity = Intent(this, MainActivity::class.java)
+                        goToMainActivity.putExtra("user", user)
                         startActivity(goToMainActivity)
                     } else{
                         Toast.makeText(baseContext, "Authentication failed.", Toast.LENGTH_SHORT).show()
@@ -80,4 +83,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             R.id.login -> sigIn(fieldEmail.text.toString(), fieldPassword.text.toString())
         }
     }
+
+
 }

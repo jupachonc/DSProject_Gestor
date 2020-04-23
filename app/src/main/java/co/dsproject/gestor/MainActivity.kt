@@ -1,8 +1,10 @@
 package co.dsproject.gestor
 
+import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.view.Menu
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
@@ -15,6 +17,8 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.FirebaseDatabase
 import java.time.LocalDate
 import java.time.Month
 
@@ -41,7 +45,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        cars.insert(carro)
+        var user: FirebaseUser = intent.extras?.get("user") as FirebaseUser
+        var prefs = getSharedPreferences("user", Context.MODE_PRIVATE)
+        var editor = prefs.edit()
+        editor.putString("user", user.uid)
+        editor.commit()
+
+
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 

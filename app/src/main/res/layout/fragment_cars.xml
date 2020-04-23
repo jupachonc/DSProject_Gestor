@@ -14,30 +14,32 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:clickable="true"
-        android:src="@drawable/home_icon_silhouette"
+        android:src="@drawable/ic_add_black_24dp"
         android:focusable="true"
-        android:layout_margin="16dp"/>
+        android:layout_margin="16dp"
+        app:backgroundTint="#f50057" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton2"
+        android:id="@+id/BackButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_margin="16dp"
         android:clickable="true"
-        android:src="@drawable/common_google_signin_btn_icon_light"
-        app:backgroundTint="#E22323"
-        android:focusable="true" />
+        android:focusable="true"
+        android:src="@drawable/ic_arrow_back_black_24dp"
+        app:backgroundTint="#f44336" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton3"
+        android:id="@+id/NextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|end"
         android:layout_margin="16dp"
         android:clickable="true"
-        android:src="@drawable/common_google_signin_btn_icon_light_normal"
-        android:focusable="true" />
+        android:focusable="true"
+        android:src="@drawable/ic_arrow_next_24dp"
+        app:backgroundTint="#f44336" />
 
     <TextView
         android:id="@+id/Placa"
@@ -50,6 +52,16 @@
         android:textAllCaps="false"
         android:textColor="#000000"
         android:textSize="50sp" />
+
+    <TextView
+        android:id="@+id/Tittle_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="84dp"
+        android:text="@string/datos_veh_culo"
+        android:textColor="#020202"
+        android:textSize="30sp" />
 
     <TextView
         android:id="@+id/Propietario_id"
@@ -95,8 +107,17 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="220dp"
-        android:text="Linea:"
+        android:text="@string/linea"
         android:textColor="#000000"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/Linea_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="162dp"
+        android:layout_marginTop="220dp"
+        android:text="Spark GT"
         android:textSize="20sp" />
 
     <TextView
@@ -105,19 +126,132 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="256dp"
-        android:text="Modelo:"
+        android:text="@string/modelo"
         android:textColor="#000000"
         android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/Tittle_1"
+        android:id="@+id/Modelo_int"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="84dp"
-        android:text="Datos Vehículos"
-        android:textColor="#020202"
-        android:textSize="30sp" />
+        android:layout_marginStart="162dp"
+        android:layout_marginTop="256dp"
+        android:text="2008"
+        android:textSize="20sp" />
 
+    <TextView
+        android:id="@+id/Tittle_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|center_horizontal"
+        android:gravity="center_vertical"
+        android:text="Datos Adicionales"
+        android:textColor="#020202"
+        android:textSize="28sp" />
+
+    <TextView
+        android:id="@+id/Mant_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="64dp"
+        android:text="Mantenimiento:"
+        android:textColor="#000000"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/Mant_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="198dp"
+        android:layout_marginTop="64dp"
+        android:text="2008"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/SOAT_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="100dp"
+        android:text="SOAT:"
+        android:textColor="#000000"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/SOAT_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="162dp"
+        android:layout_marginTop="100dp"
+        android:text="2008"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/RTM_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="136dp"
+        android:text="Revisión:"
+        android:textColor="#000000"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/RTM_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="162dp"
+        android:layout_marginTop="136dp"
+        android:text="2008"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/Poliza_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="172dp"
+        android:text="Póliza:"
+        android:textColor="#000000"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/Poliza_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="162dp"
+        android:layout_marginTop="172dp"
+        android:text="2008"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/Impuesto_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="208dp"
+        android:text="Impuesto:"
+        android:textColor="#000000"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/Impuesto_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="208dp"
+        android:text="2008"
+        android:textSize="20sp" />
 
 </FrameLayout>
