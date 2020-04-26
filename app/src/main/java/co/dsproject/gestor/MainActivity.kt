@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     var cars = Lista<Car>()
     @RequiresApi(Build.VERSION_CODES.O)
-    val carro = Car(
+    /*val carro = Car(
             "ME",
             "ABC123",
             "CHEVROLET",
@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
             LocalDate.of(2020, Month.JANUARY, 1),
             LocalDate.of(2020, Month.JANUARY, 1)
 
-    )
+    )*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

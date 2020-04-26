@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".cars">
+    tools:context=".ui.cars">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -165,7 +165,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_marginStart="198dp"
+        android:layout_marginStart="183dp"
         android:layout_marginTop="64dp"
         android:text="2008"
         android:textSize="20sp" />
@@ -186,7 +186,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_marginStart="162dp"
+        android:layout_marginStart="150dp"
         android:layout_marginTop="100dp"
         android:text="2008"
         android:textSize="20sp" />
@@ -207,7 +207,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_marginStart="162dp"
+        android:layout_marginStart="150dp"
         android:layout_marginTop="136dp"
         android:text="2008"
         android:textSize="20sp" />
@@ -228,7 +228,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_marginStart="162dp"
+        android:layout_marginStart="150dp"
         android:layout_marginTop="172dp"
         android:text="2008"
         android:textSize="20sp" />

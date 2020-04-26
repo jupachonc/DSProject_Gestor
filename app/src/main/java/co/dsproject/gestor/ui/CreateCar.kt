@@ -12,6 +12,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import co.dsproject.gestor.Car
 import co.dsproject.gestor.R
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -131,8 +132,8 @@ class CreateCar : Fragment(), View.OnClickListener {
                 val datePickerDialog = ctx?.let {
                     DatePickerDialog(it,
                             OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                                UMant.setText(year.toString() + "-" + (monthOfYear + 1) +
-                                        "-" + dayOfMonth.toString())
+                                UMant.setText(year.toString() + "-" + String.format("%02d", (monthOfYear + 1)) +
+                                        "-" + String.format("%02d", dayOfMonth))
                             }, mYear, mMonth, mDay)
                 }
                 datePickerDialog!!.show()
@@ -142,8 +143,8 @@ class CreateCar : Fragment(), View.OnClickListener {
                 val datePickerDialog = ctx?.let {
                     DatePickerDialog(it,
                             OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                                SOAT.setText(year.toString() + "-" + (monthOfYear + 1) +
-                                        "-" + dayOfMonth.toString())
+                                SOAT.setText(year.toString() + "-" + String.format("%02d", (monthOfYear + 1)) +
+                                        "-" + String.format("%02d", dayOfMonth))
                             }, mYear, mMonth, mDay)
                 }
                 datePickerDialog!!.show()
@@ -153,19 +154,20 @@ class CreateCar : Fragment(), View.OnClickListener {
                 val datePickerDialog = ctx?.let {
                     DatePickerDialog(it,
                             OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                                RTM.setText(year.toString() + "-" + (monthOfYear + 1) +
-                                        "-" + dayOfMonth.toString())
+                                RTM.setText(year.toString() + "-" + String.format("%02d", (monthOfYear + 1)) +
+                                        "-" + String.format("%02d", dayOfMonth))
                             }, mYear, mMonth, mDay)
                 }
                 datePickerDialog!!.show()
+
             }
 
             Pol.id -> {
                 val datePickerDialog = ctx?.let {
                     DatePickerDialog(it,
                             OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                                Pol.setText(year.toString() + "-" + (monthOfYear + 1) +
-                                        "-" + dayOfMonth.toString())
+                                Pol.setText(year.toString() + "-" + String.format("%02d", (monthOfYear + 1)) +
+                                        "-" + String.format("%02d", dayOfMonth))
                             }, mYear, mMonth, mDay)
                 }
                 datePickerDialog!!.show()
@@ -176,7 +178,7 @@ class CreateCar : Fragment(), View.OnClickListener {
                     DatePickerDialog(it,
                             OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
                                 Imp.setText(year.toString() + "-" + (monthOfYear + 1) +
-                                        "-" + dayOfMonth.toString())
+                                        "-" + String.format("%02d", dayOfMonth))
                             }, mYear, mMonth, mDay)
                 }
                 datePickerDialog!!.show()
@@ -188,18 +190,20 @@ class CreateCar : Fragment(), View.OnClickListener {
 
     private fun saveDb() {
         val database = FirebaseDatabase.getInstance().reference.child("Users/" + uid + "/Cars").push()
-        database.child("placa").setValue(nLetPlaca.text.toString() + " " + nNumPlaca.text.toString())
-        database.child("propietario").setValue(nOwner.text.toString())
-        database.child("marca").setValue(tMarca.text.toString())
-        database.child("linea").setValue(Linea.text.toString())
-        database.child("modelo").setValue(Modelo.text.toString().toInt())
-        database.child("umant").setValue(UMant.text.toString())
-        database.child("fcmant").setValue(FcMant.text.toString())
-        database.child("soat").setValue(SOAT.text.toString())
-        database.child("rtm").setValue(RTM.text.toString())
-        database.child("poliza").setValue(Pol.text.toString())
-        database.child("imp").setValue(Imp.text.toString())
+        val car = Car()
+        car.placa = nLetPlaca.text.toString() + " " + nNumPlaca.text.toString()
+        car.owner = nOwner.text.toString()
+        car.marca = tMarca.text.toString()
+        car.linea = Linea.text.toString()
+        car.modelo = Modelo.text.toString().toInt()
+        car.ultimo_mantenimiento = UMant.text.toString()
+        car.frecuencia_mantenimiento = FcMant.text.toString().toInt()
+        car.soat = SOAT.text.toString()
+        car.rtm = RTM.text.toString()
+        car.poliza = Pol.text.toString()
+        car.impuesto = Imp.text.toString()
 
+        database.setValue(car)
 
     }
 }

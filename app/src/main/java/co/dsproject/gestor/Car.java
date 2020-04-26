@@ -10,27 +10,12 @@ public class Car implements Comparable<Car> {
     private String marca;
     private String linea;
     private int modelo;
-    private LocalDate ulltimo_mantenimiento;
+    private String ultimo_mantenimiento;
     private int frecuencia_mantenimiento;
-    private LocalDate soat;
-    private LocalDate rtm;
-    private LocalDate poliza;
-    private LocalDate impuesto;
-
-    public Car(String owner, String placa, String marca, String linea, int modelo, LocalDate ulltimo_mantenimiento,
-        int frecuencia_mantenimiento, LocalDate soat, LocalDate rtm, LocalDate poliza, LocalDate impuesto){
-        this.owner = owner;
-        this.placa = placa;
-        this.marca = marca;
-        this.linea = linea;
-        this.modelo = modelo;
-        this.ulltimo_mantenimiento = ulltimo_mantenimiento;
-        this.frecuencia_mantenimiento = frecuencia_mantenimiento;
-        this.soat = soat;
-        this.rtm = rtm;
-        this.poliza = poliza;
-        this.impuesto = impuesto;
-    }
+    private String soat;
+    private String rtm;
+    private String poliza;
+    private String impuesto;
 
 
     @Override
@@ -78,13 +63,14 @@ public class Car implements Comparable<Car> {
         this.modelo = modelo;
     }
 
-    public LocalDate getUlltimo_mantenimiento() {
-        return ulltimo_mantenimiento;
+    public String getUltimo_mantenimiento() {
+        return ultimo_mantenimiento;
     }
 
-    public void setUlltimo_mantenimiento(LocalDate ulltimo_mantenimiento) {
-        this.ulltimo_mantenimiento = ulltimo_mantenimiento;
+    public void setUltimo_mantenimiento(String ultimo_mantenimiento) {
+        this.ultimo_mantenimiento = ultimo_mantenimiento;
     }
+
 
     public int getFrecuencia_mantenimiento() {
         return frecuencia_mantenimiento;
@@ -94,35 +80,35 @@ public class Car implements Comparable<Car> {
         this.frecuencia_mantenimiento = frecuencia_mantenimiento;
     }
 
-    public LocalDate getSoat() {
+    public String getSoat() {
         return soat;
     }
 
-    public void setSoat(LocalDate soat) {
+    public void setSoat(String soat) {
         this.soat = soat;
     }
 
-    public LocalDate getRtm() {
+    public String getRtm() {
         return rtm;
     }
 
-    public void setRtm(LocalDate rtm) {
+    public void setRtm(String rtm) {
         this.rtm = rtm;
     }
 
-    public LocalDate getPoliza() {
+    public String getPoliza() {
         return poliza;
     }
 
-    public void setPoliza(LocalDate poliza) {
+    public void setPoliza(String poliza) {
         this.poliza = poliza;
     }
 
-    public LocalDate getImpuesto() {
+    public String getImpuesto() {
         return impuesto;
     }
 
-    public void setImpuesto(LocalDate impuesto) {
+    public void setImpuesto(String impuesto) {
         this.impuesto = impuesto;
     }
 }
