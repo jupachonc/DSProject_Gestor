@@ -1,6 +1,5 @@
 package co.dsproject.gestor.ui
 
-import android.R
 import android.annotation.SuppressLint
 import android.app.ProgressDialog
 import android.os.Build
@@ -17,13 +16,14 @@ import androidx.fragment.app.FragmentTransaction
 import co.dsproject.gestor.Car
 import co.dsproject.gestor.DoubleNode
 import co.dsproject.gestor.Lista
+import co.dsproject.gestor.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.*
 import java.time.LocalDate
 import java.time.Month
 
 
-class cars : Fragment(), View.OnClickListener {
+class Cars : Fragment(), View.OnClickListener {
     private var param1: String? = null
     private var param2: String? = null
     private var listcars = Lista<Car>()
@@ -129,7 +129,7 @@ class cars : Fragment(), View.OnClickListener {
             newcar.id -> {
                 val cc = CreateCar()
                 val transaction: FragmentTransaction = fragmentManager!!.beginTransaction()
-                transaction.replace(R.id.list_container, cc)
+                transaction.replace(R.id.nav_host_fragment, cc)
                 transaction.addToBackStack(null)
                 transaction.commit()
 

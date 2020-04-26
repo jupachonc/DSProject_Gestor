@@ -177,7 +177,7 @@ class CreateCar : Fragment(), View.OnClickListener {
                 val datePickerDialog = ctx?.let {
                     DatePickerDialog(it,
                             OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                                Imp.setText(year.toString() + "-" + (monthOfYear + 1) +
+                                Imp.setText(year.toString() + "-" + String.format("%02d", (monthOfYear + 1)) +
                                         "-" + String.format("%02d", dayOfMonth))
                             }, mYear, mMonth, mDay)
                 }
