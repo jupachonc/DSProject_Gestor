@@ -16,6 +16,7 @@
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="menu_cars">Vehículos</string>
+    <string name="menu_newcar">Crear Vehículo</string>
 
     <string name="home_second">Home Second</string>
     <string name="placa">ABC 123</string>

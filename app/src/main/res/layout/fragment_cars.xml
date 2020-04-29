@@ -20,6 +20,19 @@
         app:backgroundTint="#f50057" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_marginEnd="80dp"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic_delete_black_24dp"
+        app:backgroundTint="#d61004" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/BackButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -40,6 +53,8 @@
         android:focusable="true"
         android:src="@drawable/ic_arrow_next_24dp"
         app:backgroundTint="#f44336" />
+
+
 
     <TextView
         android:id="@+id/Placa"
@@ -145,7 +160,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center|center_horizontal"
         android:gravity="center_vertical"
-        android:text="Datos Adicionales"
+        android:text="Vencimientos"
         android:textColor="#020202"
         android:textSize="28sp" />
 

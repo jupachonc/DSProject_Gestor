@@ -1,347 +1,317 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.CreateCar">
+    android:layout_width="match_parent" android:layout_height="match_parent">
 
-    <!-- TODO: Update blank fragment layout -->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/Clayout"
+    <TextView
+        android:id="@+id/Tittle_Create"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="16dp">
+        android:layout_margin="16dp"
+        android:gravity="center_horizontal"
+        android:text="CREA UN NUEVO VEHÍCULO"
+        android:textColor="@android:color/black"
+        android:textSize="32sp" />
 
-        <TextView
-            android:id="@+id/Tittle_Create"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal"
-            android:text="CREA UN NUEVO VEHÍCULO"
-            android:textColor="@android:color/black"
-            android:textSize="36sp"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="-16dp" />
+    <TextView
+        android:id="@+id/idPlaca"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="110dp"
+        android:text="Placa:"
+        android:textColor="#000000"
+        android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/idPlaca"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="136dp"
-            android:text="Placa:"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <EditText
+        android:id="@+id/Placa_num"
+        android:layout_width="64dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="86dp"
+        android:layout_marginTop="100dp"
+        android:ems="10"
+        android:hint="123"
+        android:inputType="number"
+        android:maxLength="3"
+        android:textAlignment="center" />
 
-        <EditText
-            android:id="@+id/Placa_num"
-            android:layout_width="64dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="128dp"
-            android:ems="10"
-            android:hint="123"
-            android:inputType="number"
-            android:maxLength="3"
-            app:layout_constraintStart_toEndOf="@+id/Placa_Let"
-            app:layout_constraintTop_toTopOf="@+id/Tittle_Create" />
+    <TextView
+        android:id="@+id/id-"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="153dp"
+        android:layout_marginTop="100dp"
+        android:text="-"
+        android:textColor="#000000"
+        android:textSize="32sp" />
 
-        <EditText
-            android:id="@+id/Placa_Let"
-            android:layout_width="64dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="36dp"
-            android:layout_marginTop="128dp"
-            android:ems="10"
-            android:hint="ABC"
-            android:inputType="textPersonName|textCapCharacters"
-            android:maxLength="3"
-            app:layout_constraintStart_toEndOf="@+id/idPlaca"
-            app:layout_constraintTop_toTopOf="parent" />
+    <EditText
+        android:id="@+id/Placa_Let"
+        android:layout_width="64dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="168dp"
+        android:layout_marginTop="100dp"
+        android:ems="10"
+        android:hint="ABC"
+        android:inputType="textPersonName|textCapCharacters"
+        android:maxLength="3"
+        android:textAlignment="center"/>
 
+    <TextView
+        android:id="@+id/idOwner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="150dp"
+        android:text="Propietario:"
+        android:textColor="#000000"
+        android:textSize="20sp" />
 
+    <EditText
+        android:id="@+id/nPropietario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginTop="140dp"
+        android:layout_marginEnd="20dp"
+        android:ems="10"
+        android:hint="Nombre Propietario"
+        android:inputType="textPersonName|textCapWords" />
 
-        <TextView
-            android:id="@+id/idOwner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="190dp"
-            android:text="Propietario:"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/nPropietario"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="182dp"
-            android:ems="10"
-            android:hint="Nombre Propietario"
-            android:inputType="textPersonName|textCapWords"
-            app:layout_constraintStart_toEndOf="@+id/idOwner"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/idMarca"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="236dp"
-            android:text="Marca:"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/nMarca"
-            android:layout_width="259dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="228dp"
-            android:ems="10"
-            android:hint="Marca"
-            android:inputType="textPersonName|textCapWords"
-            app:layout_constraintStart_toEndOf="@+id/idMarca"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/idLinea"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="278dp"
-            android:text="Linea:"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/nLinea"
-            android:layout_width="259dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="270dp"
-            android:ems="10"
-            android:hint="Linea"
-            android:inputType="textPersonName|textCapWords"
-            app:layout_constraintStart_toEndOf="@+id/idLinea"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/idModelo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="320dp"
-            android:text="Modelo:"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/nModelo"
-            android:layout_width="259dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="312dp"
-            android:ems="10"
-            android:hint="2001"
-            android:inputType="text|number"
-            android:maxLength="4"
-            app:layout_constraintStart_toEndOf="@+id/idModelo"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/idUMant"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="372dp"
-            android:text="U. Mantenimiento"
-            android:textColor="@android:color/black"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toStartOf="@+id/idFrecuencia"
-            app:layout_constraintHorizontal_bias="0.301"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/nUMant"
-            android:layout_width="182dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="8dp"
-            android:clickable="true"
-            android:contextClickable="true"
-            android:ems="10"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:inputType="date"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/idUMant" />
-
-        <TextView
-            android:id="@+id/idFrecuencia"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="374dp"
-            android:layout_marginEnd="20dp"
-            android:text="Frecuencia(días)"
-            android:textColor="@android:color/black"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/idMarca"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="190dp"
+        android:text="Marca:"
+        android:textColor="#000000"
+        android:textSize="20sp"/>
 
 
-        <EditText
-            android:id="@+id/nFcMant"
-            android:layout_width="91dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:ems="10"
-            android:inputType="number"
-            android:maxLength="3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.519"
-            app:layout_constraintStart_toEndOf="@+id/nUMant"
-            app:layout_constraintTop_toBottomOf="@+id/idFrecuencia" />
 
-        <TextView
-            android:id="@+id/idSOAT"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="468dp"
-            android:text="Vencimiento SOAT"
-            android:textColor="@android:color/black"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toStartOf="@+id/idFrecuencia"
-            app:layout_constraintHorizontal_bias="0.333"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <EditText
+        android:id="@+id/nMarca"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="180dp"
+        android:ems="10"
+        android:hint="Marca"
+        android:inputType="textPersonName|textCapWords" />
 
-        <EditText
-            android:id="@+id/nSOAT"
-            android:layout_width="182dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="4dp"
-            android:clickable="true"
-            android:contextClickable="true"
-            android:ems="10"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:inputType="date"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/idSOAT" />
+    <TextView
+        android:id="@+id/idLinea"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="230dp"
+        android:text="Linea:"
+        android:textColor="#000000"
+        android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/idRTM"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="468dp"
-            android:layout_marginStart="284dp"
-            android:text="Vencimiento RTM"
-            android:textColor="@android:color/black"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toStartOf="@+id/idFrecuencia"
-            app:layout_constraintHorizontal_bias="0.333"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <EditText
+        android:id="@+id/nLinea"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="95dp"
+        android:layout_marginTop="220dp"
+        android:ems="10"
+        android:hint="Linea"
+        android:inputType="textPersonName|textCapWords" />
 
-        <EditText
-            android:id="@+id/nRTM"
-            android:layout_width="182dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="200dp"
-            android:clickable="true"
-            android:contextClickable="true"
-            android:ems="10"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:inputType="date"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/idRTM" />
-        <TextView
-            android:id="@+id/idPol"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="552dp"
-            android:text="Vencimiento Póliza"
-            android:textColor="@android:color/black"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toStartOf="@+id/idFrecuencia"
-            app:layout_constraintHorizontal_bias="0.333"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/idModelo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="230dp"
+        android:text="Modelo:"
+        android:textColor="#000000"
+        android:textSize="20sp" />
 
-        <EditText
-            android:id="@+id/nPol"
-            android:layout_width="182dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="4dp"
-            android:clickable="true"
-            android:contextClickable="true"
-            android:ems="10"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:inputType="date"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/idPol" />
+    <EditText
+        android:id="@+id/nModelo"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginTop="220dp"
+        android:layout_marginEnd="20dp"
+        android:ems="10"
+        android:hint="2001"
+        android:inputType="text|number"
+        android:maxLength="4"
+        android:textAlignment="center"
+        tools:ignore="RtlCompat" />
 
-        <TextView
-            android:id="@+id/idImp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="552dp"
-            android:layout_marginStart="284dp"
-            android:text="Próximo Impuesto"
-            android:textColor="@android:color/black"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toStartOf="@+id/idFrecuencia"
-            app:layout_constraintHorizontal_bias="0.333"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/idUMant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="270dp"
+        android:layout_marginStart="20dp"
+        android:text="Ult. Mantenimiento"
+        android:hint="2020-01-01"
+        android:textColor="@android:color/black"
+        android:textSize="20sp" />
 
-        <EditText
-            android:id="@+id/nImp"
-            android:layout_width="182dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="200dp"
-            android:clickable="true"
-            android:contextClickable="true"
-            android:ems="10"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:inputType="date"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/idImp" />
+    <EditText
+        android:id="@+id/nUMant"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginTop="260dp"
+        android:layout_marginEnd="20dp"
+        android:clickable="true"
+        android:contextClickable="true"
+        android:ems="10"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:hint="2020-01-01"
+        android:inputType="date" />
 
-        <Button
-            android:id="@+id/savebtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/btnredondo"
-            android:clickable="true"
-            android:contextClickable="true"
-            android:text="Guardar"
-            android:textColor="@android:color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+    <TextView
+        android:id="@+id/idFrecuencia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="310dp"
+        android:layout_marginStart="20dp"
+        android:text="Frecuencia(días)"
+        android:textColor="@android:color/black"
+        android:textSize="20sp" />
 
+    <EditText
+        android:id="@+id/nFcMant"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginTop="300dp"
+        android:layout_marginEnd="20dp"
+        android:ems="10"
+        android:inputType="number"
+        android:hint="15"
+        android:maxLength="3"/>
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="350dp"
+        android:text="Vencimientos"
+        android:textSize="24sp"
+        android:textColor="#000000"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/idSOAT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="390dp"
+        android:layout_marginStart="20dp"
+        android:text="SOAT:"
+        android:textColor="@android:color/black"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/nSOAT"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="380dp"
+        android:clickable="true"
+        android:contextClickable="true"
+        android:ems="10"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:hint="2020-01-01"
+        android:inputType="date" />
+
+    <TextView
+        android:id="@+id/idRTM"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="390dp"
+        android:text="RTM:"
+        android:textColor="@android:color/black"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/nRTM"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|end"
+        android:layout_marginTop="380dp"
+        android:layout_marginEnd="20dp"
+        android:clickable="true"
+        android:contextClickable="true"
+        android:ems="10"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:hint="2020-01-01"
+        android:inputType="date"/>
+
+    <TextView
+        android:id="@+id/idPol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="430dp"
+        android:layout_marginStart="20dp"
+        android:text="Póliza:"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"/>
+
+    <EditText
+        android:id="@+id/nPol"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="420dp"
+        android:layout_marginStart="110dp"
+        android:clickable="true"
+        android:contextClickable="true"
+        android:ems="10"
+        android:hint="2020-01-01"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:inputType="date"/>
+
+    <TextView
+        android:id="@+id/idImp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="470dp"
+        android:layout_marginStart="20dp"
+        android:text="Impuesto:"
+        android:textColor="@android:color/black"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/nImp"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="460dp"
+        android:layout_marginStart="140dp"
+        android:clickable="true"
+        android:contextClickable="true"
+        android:ems="10"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:hint="2020-01-01"
+        android:inputType="date" />
+
+    <Button
+        android:id="@+id/savebtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/btnredondo"
+        android:clickable="true"
+        android:contextClickable="true"
+        android:text="Guardar"
+        android:textColor="@android:color/white" />
+
 
 </FrameLayout>

@@ -31,6 +31,7 @@ class Cars : Fragment(), View.OnClickListener {
     private lateinit var newcar: FloatingActionButton
     private lateinit var backbtn: FloatingActionButton
     private lateinit var nextbtn: FloatingActionButton
+    private lateinit var deletebtn: FloatingActionButton
     private lateinit var mPlaca: TextView
     private lateinit var mOwner: TextView
     private lateinit var mMarca: TextView
@@ -59,6 +60,7 @@ class Cars : Fragment(), View.OnClickListener {
         newcar = view!!.findViewById(R.id.nuevo_carro)
         backbtn = view.findViewById(R.id.BackButton)
         nextbtn = view.findViewById(R.id.NextButton)
+        deletebtn = view.findViewById(R.id.delete)
         mPlaca = view.findViewById(R.id.Placa)
         mOwner = view.findViewById(R.id.propietario_name)
         mMarca = view.findViewById(R.id.Marca_name)
@@ -73,6 +75,7 @@ class Cars : Fragment(), View.OnClickListener {
         newcar.setOnClickListener(this)
         backbtn.setOnClickListener(this)
         nextbtn.setOnClickListener(this)
+        deletebtn.setOnClickListener(this)
 
         return view
     }
@@ -134,6 +137,15 @@ class Cars : Fragment(), View.OnClickListener {
                 transaction.commit()
 
             }
+
+            deletebtn.id -> {
+                listcars.delete(head!!.data)
+                updateCarsDB()
+            }
+
+
+
+
         }
     }
     }
@@ -204,7 +216,15 @@ class Cars : Fragment(), View.OnClickListener {
         })
     }
 
-
+    private fun updateCarsDB(){
+        val database = FirebaseDatabase.getInstance().getReference("Users/" + uid + "/Cars")
+        database.removeValue()
+        var ptr = listcars.head
+        while(ptr != null){
+            database.push().setValue(ptr.data)
+            ptr = ptr.next
+        }
+    }
 
 
 }
