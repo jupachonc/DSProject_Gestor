@@ -141,10 +141,9 @@ class Cars : Fragment(), View.OnClickListener {
             deletebtn.id -> {
                 listcars.delete(head!!.data)
                 updateCarsDB()
+                updateUI()
+                Toast.makeText(context, "Vehículo eliminado", Toast.LENGTH_SHORT).show()
             }
-
-
-
 
         }
     }
