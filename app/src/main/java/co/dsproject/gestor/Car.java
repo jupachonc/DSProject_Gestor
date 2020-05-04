@@ -1,5 +1,7 @@
 package co.dsproject.gestor;
 
+import androidx.annotation.Nullable;
+
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -21,6 +23,11 @@ public class Car implements Comparable<Car> {
     @Override
     public int compareTo(Car o) {
         return this.placa.compareTo(o.placa);
+    }
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        return placa.equals((((Car) obj).placa));
     }
 
     public String getOwner() {

@@ -123,8 +123,13 @@ class CreateCar : Fragment(), View.OnClickListener {
         when (i) {
 
             bSave.id -> {
-                saveDb()
-                Toast.makeText(context, "Vehiculo creado", Toast.LENGTH_SHORT).show()
+                if(correctlyForm()){
+                    saveDb()
+                    Toast.makeText(context, "Vehiculo creado", Toast.LENGTH_SHORT).show()
+                    cleanForm()
+                }else{
+                    Toast.makeText(context, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show()
+                }
 
             }
 
@@ -206,4 +211,36 @@ class CreateCar : Fragment(), View.OnClickListener {
         database.setValue(car)
 
     }
+
+    private fun cleanForm(){
+        nLetPlaca.setText("")
+        nNumPlaca.setText("")
+        nOwner.setText("")
+        tMarca.setText("")
+        Linea.setText("")
+        Modelo.setText("")
+        UMant.setText("")
+        FcMant.setText("")
+        SOAT.setText("")
+        RTM.setText("")
+        Pol.setText("")
+        Imp.setText("")
+
+    }
+
+    private fun correctlyForm() : Boolean{
+        return nLetPlaca.text.toString() != ""
+                && nNumPlaca.text.toString() != ""
+                && nOwner.toString() != ""
+                && tMarca.toString() != ""
+                && Linea.toString() != ""
+                && Modelo.toString() != ""
+                && UMant.toString() != ""
+                && FcMant.toString() != ""
+                && SOAT.toString() != ""
+                && RTM.toString() != ""
+                && Pol.toString() != ""
+                && Imp.toString() != ""
+    }
+
 }

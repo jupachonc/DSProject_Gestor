@@ -57,7 +57,7 @@ class Cars : Fragment(), View.OnClickListener {
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_cars, container, false)
 
-        newcar = view!!.findViewById(R.id.nuevo_carro)
+        newcar = view.findViewById(R.id.nuevo_carro)
         backbtn = view.findViewById(R.id.BackButton)
         nextbtn = view.findViewById(R.id.NextButton)
         deletebtn = view.findViewById(R.id.delete)
@@ -131,11 +131,10 @@ class Cars : Fragment(), View.OnClickListener {
 
             newcar.id -> {
                 val cc = CreateCar()
-                val transaction: FragmentTransaction = fragmentManager!!.beginTransaction()
+                val transaction: FragmentTransaction = requireFragmentManager().beginTransaction()
                 transaction.replace(R.id.nav_host_fragment, cc)
                 transaction.addToBackStack(null)
                 transaction.commit()
-
             }
 
             deletebtn.id -> {
@@ -145,9 +144,6 @@ class Cars : Fragment(), View.OnClickListener {
                 updateUI()
                 Toast.makeText(context, "Vehículo eliminado", Toast.LENGTH_SHORT).show()
             }
-
-
-
 
         }
     }

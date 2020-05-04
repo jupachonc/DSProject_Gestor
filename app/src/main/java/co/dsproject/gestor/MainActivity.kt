@@ -4,7 +4,8 @@ import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.view.Menu
-import android.widget.Toast
+import android.view.View
+import android.widget.TextView
 import androidx.annotation.RequiresApi
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
@@ -18,30 +19,18 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
-import java.time.LocalDate
-import java.time.Month
+import com.google.firebase.database.ValueEventListener
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
-    var cars = Lista<Car>()
+
+
+
     @RequiresApi(Build.VERSION_CODES.O)
-    /*val carro = Car(
-            "ME",
-            "ABC123",
-            "CHEVROLET",
-            "GT",
-            2009,
-            LocalDate.of(2020, Month.JANUARY, 1),
-            15,
-            LocalDate.of(2020, Month.JANUARY, 1),
-            LocalDate.of(2020, Month.JANUARY, 1),
-            LocalDate.of(2020, Month.JANUARY, 1),
-            LocalDate.of(2020, Month.JANUARY, 1)
-
-    )*/
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -50,7 +39,17 @@ class MainActivity : AppCompatActivity() {
         var editor = prefs.edit()
         editor.putString("user", user.uid)
         editor.commit()
+        val view: View = findViewById<NavigationView>(R.id.nav_view).getHeaderView(0)
+        val emailheader: TextView = view.findViewById(R.id.subtittleheader)
+        emailheader.text = user.email
+        val database = FirebaseDatabase.getInstance().reference.child("Users/" + user.uid + "/Data/name")
+        database.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                view.findViewById<TextView>(R.id.tittleheader).text = dataSnapshot.getValue(String::class.java)
+            }
 
+            override fun onCancelled(databaserror: DatabaseError) {}
+        })
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
