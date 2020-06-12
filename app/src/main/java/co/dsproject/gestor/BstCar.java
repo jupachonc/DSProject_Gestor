@@ -3,7 +3,7 @@ package co.dsproject.gestor;
 public class BstCar {
 
     //Inner Class: Node
-    private class Node {
+    public class Node {
         private Node left;
         private Car data;
         private Node right;
@@ -15,6 +15,18 @@ public class BstCar {
             this.data = data;
             right = null;
         }
+
+        public Car getData() {
+            return data;
+        }
+
+        public Node getLeft() {
+            return left;
+        }
+
+        public Node getRight() {
+            return right;
+        }
     }
 
     private Node root;
@@ -24,6 +36,8 @@ public class BstCar {
     public void insertBST(Car num) {
         root = insert(num,root);
     }
+
+
 
     private Node insert(Car data, Node p) {
         if(p == null)
@@ -42,7 +56,11 @@ public class BstCar {
         return p;
     }
 
-    public Node remove(String placa, Node p){
+    public Node removeBST(String placa){
+        return remove(placa, root);
+    }
+
+    private Node remove(String placa, Node p){
         if(p!= null) {
             if (placa.compareTo(p.data.getPlaca()) < 0) {
                 p.left = remove(placa, p.left);
@@ -90,6 +108,23 @@ public class BstCar {
         if(ptr.right!= null){
             traverse(ptr.right);
         }
+    }
+
+    public Car findBST(String placa){
+        return find(placa, root);
+    }
+
+    private Car find(String placa, Node root){
+        if(root != null) {
+            if (placa.equals(root.data.getPlaca())) {
+                return root.data;
+            } else if (placa.compareTo(root.data.getPlaca()) < 0) {
+                return find(placa, root.left);
+            } else if (placa.compareTo(root.data.getPlaca()) > 0) {
+                return find(placa, root.right);
+            }
+        }
+        return null;
     }
     public Node getRoot(){
 

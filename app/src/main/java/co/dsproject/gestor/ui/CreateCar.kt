@@ -110,7 +110,6 @@ class CreateCar : Fragment(), View.OnClickListener {
                 }
     }
 
-    @SuppressLint("SetTextI18n")
     override fun onClick(v: View?) {
         var i = v?.id
 

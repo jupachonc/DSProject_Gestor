@@ -1,7 +1,8 @@
 package co.dsproject.gestor;
 
+
 public class Pila<T extends Comparable> {
-    private DoubleNode<T> top;
+    private NodeGeneric<T> top;
 
     public Pila() {
         top = null;
@@ -12,10 +13,9 @@ public class Pila<T extends Comparable> {
     }
 
     public void push(T data){
-        DoubleNode next = new DoubleNode<T>(data);
+        NodeGeneric next = new NodeGeneric<T>(data);
         if (top != null) {
-            top.setNext(next);
-            next.setBack(top);
+            next.setNext(top);
         }
         top = next;
 
@@ -23,7 +23,7 @@ public class Pila<T extends Comparable> {
     public T pop(){
         if(empty()) throw new RuntimeException("Stack is empty");
         T data = top.getData();
-        top = top.getBack();
+        top = top.getNext();
         return data;
     }
 }

@@ -1,6 +1,7 @@
 package co.dsproject.gestor.ui
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.app.ProgressDialog
 import android.os.Build
 import android.os.Bundle
@@ -32,6 +33,17 @@ class Cars : Fragment(), View.OnClickListener {
     private lateinit var backbtn: FloatingActionButton
     private lateinit var nextbtn: FloatingActionButton
     private lateinit var deletebtn: FloatingActionButton
+    private lateinit var title_1 : TextView
+    private lateinit var title_2 : TextView
+    private lateinit var iOwner: TextView
+    private lateinit var iMarca: TextView
+    private lateinit var iLinea: TextView
+    private lateinit var iModelo: TextView
+    private lateinit var iMant: TextView
+    private lateinit var iSOAT: TextView
+    private lateinit var iRTM: TextView
+    private lateinit var iPoliza: TextView
+    private lateinit var iImp: TextView
     private lateinit var mPlaca: TextView
     private lateinit var mOwner: TextView
     private lateinit var mMarca: TextView
@@ -43,6 +55,7 @@ class Cars : Fragment(), View.OnClickListener {
     private lateinit var mPoliza: TextView
     private lateinit var mImp: TextView
     private lateinit var uid: String
+    private lateinit var mDefault: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,10 +70,28 @@ class Cars : Fragment(), View.OnClickListener {
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_cars, container, false)
 
+
+        //Buttons
         newcar = view.findViewById(R.id.nuevo_carro)
         backbtn = view.findViewById(R.id.BackButton)
         nextbtn = view.findViewById(R.id.NextButton)
         deletebtn = view.findViewById(R.id.delete)
+
+        //Tags
+        title_1 = view.findViewById(R.id.Tittle_1)
+        title_2 = view.findViewById(R.id.Tittle_2)
+        iOwner = view.findViewById(R.id.Propietario_id)
+        iMarca = view.findViewById(R.id.Marca)
+        iLinea = view.findViewById(R.id.Linea_id)
+        iModelo = view.findViewById(R.id.Modelo_id)
+        iMant = view.findViewById(R.id.Mant_id)
+        iSOAT = view.findViewById(R.id.SOAT_id)
+        iRTM = view.findViewById(R.id.RTM_id)
+        iPoliza = view.findViewById(R.id.Poliza_id)
+        iImp = view.findViewById(R.id.Impuesto_id)
+
+
+        //Atributtes
         mPlaca = view.findViewById(R.id.Placa)
         mOwner = view.findViewById(R.id.propietario_name)
         mMarca = view.findViewById(R.id.Marca_name)
@@ -71,7 +102,10 @@ class Cars : Fragment(), View.OnClickListener {
         mRTM = view.findViewById(R.id.RTM_date)
         mPoliza = view.findViewById(R.id.Poliza_date)
         mImp = view.findViewById(R.id.Impuesto_date)
+        mDefault = view.findViewById(R.id.message)
 
+
+        //Listeners
         newcar.setOnClickListener(this)
         backbtn.setOnClickListener(this)
         nextbtn.setOnClickListener(this)
@@ -84,7 +118,7 @@ class Cars : Fragment(), View.OnClickListener {
     override fun onStart() {
         super.onStart()
         if(listcars.head == null) {
-            val dialog = ProgressDialog(activity);
+            val dialog = ProgressDialog(activity, R.style.AppCompatAlertDialogStyle)
             val database = FirebaseDatabase.getInstance().getReference("Users/" + uid + "/Cars")
             readData(database, object : OnGetDataListener {
                 override fun onSuccess(dataSnapshot: DataSnapshot?) {
@@ -138,12 +172,22 @@ class Cars : Fragment(), View.OnClickListener {
             }
 
             deletebtn.id -> {
-                listcars.delete(head!!.data)
-                updateCarsDB()
-                head = listcars.head
-                updateUI()
-                Toast.makeText(context, "Vehículo eliminado", Toast.LENGTH_SHORT).show()
+                val builder: AlertDialog.Builder = AlertDialog.Builder(context, 16974374)
+                builder.setTitle(getString(R.string.AlertDialog_DE))
+                builder.setMessage("El vehículo con placa " + head!!.data.placa + " va a ser eliminado.")
+                builder.setPositiveButton("Aceptar"){ dialog, which ->
+                    listcars.delete(head!!.data)
+                    updateCarsDB()
+                    head = listcars.head
+                    updateUI()
+                    Toast.makeText(context, "Vehículo eliminado", Toast.LENGTH_SHORT).show()
+                }
+                builder.setNegativeButton(android.R.string.no) { dialog, which ->
+                    dialog.dismiss()
+                }
+                builder.show()
             }
+
 
         }
     }
@@ -152,7 +196,7 @@ class Cars : Fragment(), View.OnClickListener {
     @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.O)
     fun updateUI() = if (head != null) {
-
+        updateLayout(View.VISIBLE)
         mPlaca.text = this.head!!.data.placa
         mOwner.text = this.head!!.data.owner
         mMarca.text = this.head!!.data.marca
@@ -170,6 +214,7 @@ class Cars : Fragment(), View.OnClickListener {
         mImp.text = FechaLarga(fImp)
 
     } else {
+        updateLayout(View.GONE)
             Toast.makeText(context, "No hay vehículos registrados", Toast.LENGTH_SHORT).show()
 
     }
@@ -223,6 +268,27 @@ class Cars : Fragment(), View.OnClickListener {
             database.push().setValue(ptr.data)
             ptr = ptr.next
         }
+    }
+
+    private fun updateLayout(flag: Int){
+        if(flag == View.VISIBLE){
+            mDefault.visibility = View.GONE
+
+        }else{
+            mDefault.visibility = View.VISIBLE
+        }
+
+        newcar.visibility = flag; backbtn.visibility = flag; nextbtn.visibility = flag
+        deletebtn.visibility = flag; title_1.visibility = flag; title_2.visibility = flag
+        iOwner.visibility = flag; iMarca.visibility = flag; iLinea.visibility = flag
+        iModelo.visibility = flag; iMant.visibility = flag; iSOAT.visibility = flag
+        iRTM.visibility = flag; iPoliza.visibility = flag; iImp.visibility = flag
+        mPlaca.visibility = flag; mOwner.visibility = flag; mMarca.visibility = flag
+        mLinea.visibility = flag; mModelo.visibility = flag; mMant.visibility = flag
+        mSOAT.visibility = flag; mRTM.visibility = flag; mPoliza.visibility = flag
+        mImp.visibility = flag
+
+
     }
 
 

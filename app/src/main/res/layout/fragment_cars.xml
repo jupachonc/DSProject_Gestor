@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/DarkGray"
     tools:context=".ui.Cars">
 
     <!-- TODO: Update blank fragment layout -->
@@ -13,10 +14,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
-        android:clickable="true"
-        android:src="@drawable/ic_add_black_24dp"
-        android:focusable="true"
         android:layout_margin="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic_add_black_24dp"
+        android:visibility="gone"
         app:backgroundTint="#f50057" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -29,6 +31,7 @@
         android:clickable="true"
         android:focusable="true"
         android:src="@drawable/ic_delete_black_24dp"
+        android:visibility="gone"
         app:backgroundTint="#d61004" />
 
 
@@ -41,6 +44,7 @@
         android:clickable="true"
         android:focusable="true"
         android:src="@drawable/ic_arrow_back_black_24dp"
+        android:visibility="gone"
         app:backgroundTint="#f44336" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -52,8 +56,8 @@
         android:clickable="true"
         android:focusable="true"
         android:src="@drawable/ic_arrow_next_24dp"
+        android:visibility="gone"
         app:backgroundTint="#f44336" />
-
 
 
     <TextView
@@ -65,8 +69,9 @@
         android:gravity="center_horizontal"
         android:text="@string/placa"
         android:textAllCaps="false"
-        android:textColor="#000000"
-        android:textSize="50sp" />
+        android:textColor="@android:color/white"
+        android:textSize="50sp"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/Tittle_1"
@@ -75,8 +80,10 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="84dp"
         android:text="@string/datos_veh_culo"
-        android:textColor="#020202"
-        android:textSize="30sp" />
+        android:textColor="@android:color/white"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/Propietario_id"
@@ -85,8 +92,9 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="148dp"
         android:text="@string/propietario"
-        android:textColor="#000000"
-        android:textSize="20sp" />
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/propietario_name"
@@ -95,7 +103,9 @@
         android:layout_marginStart="162dp"
         android:layout_marginTop="148dp"
         android:text="@string/jhon_due"
-        android:textSize="20sp" />
+        android:textColor="@color/GrayWhite"
+        android:textSize="20sp"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/Marca"
@@ -104,8 +114,9 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="184dp"
         android:text="@string/marca"
-        android:textColor="#000000"
-        android:textSize="20sp" />
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/Marca_name"
@@ -114,7 +125,9 @@
         android:layout_marginStart="162dp"
         android:layout_marginTop="184dp"
         android:text="Chevrolet"
-        android:textSize="20sp" />
+        android:textColor="@color/GrayWhite"
+        android:textSize="20sp"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/Linea_id"
@@ -123,8 +136,9 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="220dp"
         android:text="@string/linea"
-        android:textColor="#000000"
-        android:textSize="20sp" />
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/Linea_name"
@@ -133,7 +147,9 @@
         android:layout_marginStart="162dp"
         android:layout_marginTop="220dp"
         android:text="Spark GT"
-        android:textSize="20sp" />
+        android:textColor="@color/GrayWhite"
+        android:textSize="20sp"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/Modelo_id"
@@ -142,8 +158,9 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="256dp"
         android:text="@string/modelo"
-        android:textColor="#000000"
-        android:textSize="20sp" />
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/Modelo_int"
@@ -152,7 +169,9 @@
         android:layout_marginStart="162dp"
         android:layout_marginTop="256dp"
         android:text="2008"
-        android:textSize="20sp" />
+        android:textColor="@color/GrayWhite"
+        android:textSize="20sp"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/Tittle_2"
@@ -161,8 +180,10 @@
         android:layout_gravity="center|center_horizontal"
         android:gravity="center_vertical"
         android:text="Vencimientos"
-        android:textColor="#020202"
-        android:textSize="28sp" />
+        android:textColor="@android:color/white"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/Mant_id"
@@ -172,8 +193,9 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="64dp"
         android:text="Mantenimiento:"
-        android:textColor="#000000"
-        android:textSize="20sp" />
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/Mant_date"
@@ -183,7 +205,9 @@
         android:layout_marginStart="183dp"
         android:layout_marginTop="64dp"
         android:text="2008"
-        android:textSize="20sp" />
+        android:textColor="@color/GrayWhite"
+        android:textSize="20sp"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/SOAT_id"
@@ -193,8 +217,9 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="100dp"
         android:text="SOAT:"
-        android:textColor="#000000"
-        android:textSize="20sp" />
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/SOAT_date"
@@ -204,7 +229,9 @@
         android:layout_marginStart="150dp"
         android:layout_marginTop="100dp"
         android:text="2008"
-        android:textSize="20sp" />
+        android:textColor="@color/GrayWhite"
+        android:textSize="20sp"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/RTM_id"
@@ -214,8 +241,9 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="136dp"
         android:text="Revisión:"
-        android:textColor="#000000"
-        android:textSize="20sp" />
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/RTM_date"
@@ -225,7 +253,9 @@
         android:layout_marginStart="150dp"
         android:layout_marginTop="136dp"
         android:text="2008"
-        android:textSize="20sp" />
+        android:textColor="@color/GrayWhite"
+        android:textSize="20sp"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/Poliza_id"
@@ -235,8 +265,9 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="172dp"
         android:text="Póliza:"
-        android:textColor="#000000"
-        android:textSize="20sp" />
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/Poliza_date"
@@ -246,7 +277,9 @@
         android:layout_marginStart="150dp"
         android:layout_marginTop="172dp"
         android:text="2008"
-        android:textSize="20sp" />
+        android:textColor="@color/GrayWhite"
+        android:textSize="20sp"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/Impuesto_id"
@@ -256,8 +289,9 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="208dp"
         android:text="Impuesto:"
-        android:textColor="#000000"
-        android:textSize="20sp" />
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/Impuesto_date"
@@ -267,6 +301,19 @@
         android:layout_marginStart="150dp"
         android:layout_marginTop="208dp"
         android:text="2008"
-        android:textSize="20sp" />
+        android:textColor="@color/GrayWhite"
+        android:textSize="20sp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="@string/create_car"
+        android:textColor="@color/GrayWhite"
+        android:textSize="24sp"
+        android:visibility="visible" />
 
 </FrameLayout>

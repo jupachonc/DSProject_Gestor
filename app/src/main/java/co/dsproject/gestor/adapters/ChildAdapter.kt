@@ -28,7 +28,7 @@ class ChildAdapter(private val children : List<ChildModel>)
     override fun onBindViewHolder(holder: ViewHolder,
                                   position: Int) {
         val child = children[position]
-        holder.imageView.setImageResource(child.image)
+        //holder.imageView.setImageResource(child.image)
         holder.textView.text = child.title
     }
 
@@ -36,7 +36,7 @@ class ChildAdapter(private val children : List<ChildModel>)
     inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
 
         val textView : TextView = itemView.child_textView
-        val imageView: ImageView = itemView.child_imageView
+        //val imageView: ImageView = itemView.child_imageView
 
     }
 }
