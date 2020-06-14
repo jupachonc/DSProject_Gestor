@@ -1,7 +1,5 @@
 package co.dsproject.gestor;
 
-import org.w3c.dom.Node;
-
 public class Lista<T extends Comparable<T>> {
 
     private DoubleNode<T> head;

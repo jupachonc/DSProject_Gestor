@@ -2,9 +2,6 @@ package co.dsproject.gestor;
 
 import androidx.annotation.Nullable;
 
-import java.time.LocalDate;
-import java.util.Date;
-
 public class Car implements Comparable<Car> {
 
     private String owner;

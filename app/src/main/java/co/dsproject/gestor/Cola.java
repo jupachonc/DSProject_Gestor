@@ -1,8 +1,9 @@
 package co.dsproject.gestor;
 
-public class Cola<T extends Comparable> {
+public class Cola<T> {
 
 private NodeGeneric<T> front, rear;
+private int size;
 
     public Cola(){
         front = null;
@@ -18,6 +19,7 @@ private NodeGeneric<T> front, rear;
             front = newp;
         }
         rear = newp;
+        size += 1;
     }
 
     public boolean empty() { return (front == null); }
@@ -28,8 +30,13 @@ private NodeGeneric<T> front, rear;
            item = front.getData();
            front = front.getNext();
         }
+        size -= 1;
         return item;
 
+    }
+
+    public int getSize() {
+        return size;
     }
 }
 //public int dequeue() {

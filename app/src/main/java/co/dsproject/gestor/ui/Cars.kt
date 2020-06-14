@@ -65,7 +65,6 @@ class Cars : Fragment(), View.OnClickListener {
 
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_cars, container, false)
@@ -114,7 +113,6 @@ class Cars : Fragment(), View.OnClickListener {
         return view
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onStart() {
         super.onStart()
         if(listcars.head == null) {

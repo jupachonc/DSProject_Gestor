@@ -11,6 +11,12 @@ public class DoubleNode<T> {
         back = null;
     }
 
+    public DoubleNode(T data, DoubleNode<T> back, DoubleNode<T> next) {
+        this.data = data;
+        this.back = back;
+        this.next = next;
+    }
+
     public DoubleNode(){this(null);}
 
     public void setNext(DoubleNode<T> next) {

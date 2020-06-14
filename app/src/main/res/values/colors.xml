@@ -8,4 +8,12 @@
     <color name="GrayWhite">#E6E6E6</color>
     <color name="DarkBlue">#000059</color>
     <color name="DBlue">#1529CE</color>
+
+    <color name="LightRed">#EF5350</color>
+    <color name="LightIndico">#3F51B5</color>
+    <color name="LightBlue">#42A5F5</color>
+    <color name="LightGreen">#66BB6A</color>
+    <color name="LightAmber">#FFCA28</color>
+
+
 </resources>

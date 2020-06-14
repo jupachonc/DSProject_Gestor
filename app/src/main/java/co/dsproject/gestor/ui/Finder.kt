@@ -17,6 +17,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import co.dsproject.gestor.BstCar
 import co.dsproject.gestor.Car
+import co.dsproject.gestor.Lista
 import co.dsproject.gestor.R
 import com.google.firebase.database.*
 import java.time.LocalDate
@@ -32,6 +33,7 @@ class Finder : Fragment(), View.OnClickListener {
     private lateinit var placaChar: EditText
     private lateinit var placaNum: EditText
     private lateinit var database: DatabaseReference
+    private var listCars = Lista<Car>()
 
 
 
@@ -134,6 +136,7 @@ class Finder : Fragment(), View.OnClickListener {
             builder.setPositiveButton("Cerrar"){ dialog, which ->
                     dialog.dismiss()
             }
+            /*
             builder.setNegativeButton("Eliminar Vehículo"){ dialog, which ->
                 val builder: AlertDialog.Builder = AlertDialog.Builder(context, 16974374)
                 builder.setTitle(getString(R.string.AlertDialog_DE))
@@ -147,7 +150,7 @@ class Finder : Fragment(), View.OnClickListener {
                     dialog.dismiss()
                 }
                 builder.show()
-            }
+            }*/
             builder.show()
 
         }
@@ -155,19 +158,29 @@ class Finder : Fragment(), View.OnClickListener {
 
 
     }
+    /*
     private fun updateCars(){
-        database = FirebaseDatabase.getInstance().getReference("Users/" + uid + "/Cars")
-        database.removeValue()
-        updateCarsDB(bstCars.root)
+        updateCarsDBT(bstCars.root)
+        updateCarsDB()
     }
-    private fun updateCarsDB(root: BstCar.Node) {
+    private fun updateCarsDBT(root: BstCar.Node) {
         if(root != null) {
-            database.push().setValue(root.data)
-            if(root.left != null) updateCarsDB(root.left)
-            if(root.right != null) updateCarsDB(root.right)
+            listCars.insert(root.data)
+            if(root.left != null) updateCarsDBT(root.left)
+            if(root.right != null) updateCarsDBT(root.right)
         }
 
     }
 
+    private fun updateCarsDB(){
+        val database = FirebaseDatabase.getInstance().getReference("Users/" + uid + "/Cars")
+        database.removeValue()
+        var ptr = listCars.head
+        while(ptr != null){
+            database.push().setValue(ptr.data)
+            ptr = ptr.next
+        }
+    }
+    */
 
 }

@@ -6,33 +6,43 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layout_margin="2dp"
-    card_view:cardBackgroundColor="@color/GrayWhite"
-    card_view:cardCornerRadius="5dp"
+    card_view:cardBackgroundColor="@android:color/white"
 
+    card_view:cardCornerRadius="5dp"
     card_view:cardElevation="4dp"
     card_view:cardUseCompatPadding="true">
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/child_textView"
-            android:layout_width="129dp"
+            android:layout_width="130dp"
             android:layout_height="37dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:background="@android:color/darker_gray"
+            android:background="@color/LightRed"
+            android:gravity="center"
+            android:hapticFeedbackEnabled="false"
             android:padding="10dp"
             android:text="TextView"
             android:textColor="@android:color/white"
-            android:textStyle="bold"
-            card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintTop_toTopOf="parent" />
+            android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/child_days"
+            android:layout_width="130dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            android:gravity="center"
+            android:selectAllOnFocus="false"
+            android:text="30\n Días Restantes"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+    </LinearLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
 
