@@ -21,6 +21,7 @@ import co.dsproject.gestor.Lista
 import co.dsproject.gestor.R
 import com.google.firebase.database.*
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 class Finder : Fragment(), View.OnClickListener {
@@ -34,6 +35,16 @@ class Finder : Fragment(), View.OnClickListener {
     private lateinit var placaNum: EditText
     private lateinit var database: DatabaseReference
     private var listCars = Lista<Car>()
+    val p0 = HashSet<String>()
+    val p1 = HashSet<String>()
+    val p2 = HashSet<String>()
+    val p3 = HashSet<String>()
+    val p4 = HashSet<String>()
+    val p5 = HashSet<String>()
+    val p6 = HashSet<String>()
+    val p7 = HashSet<String>()
+    val p8 = HashSet<String>()
+    val p9 = HashSet<String>()
 
 
 
@@ -70,6 +81,7 @@ class Finder : Fragment(), View.OnClickListener {
                 for (snapshot in dataSnapshot!!.children) {
                     var car = snapshot.getValue(Car::class.java)
                     bstCars.insertBST(car)
+                    addPlc(car!!)
                 }
                 if(null == bstCars.root){delfaultM.visibility = View.VISIBLE; mainCons.visibility = View.GONE}
                 else{delfaultM.visibility = View.GONE; mainCons.visibility = View.VISIBLE}
@@ -119,6 +131,7 @@ class Finder : Fragment(), View.OnClickListener {
     private fun search() {
         val car = bstCars.findBST(placaChar.text.toString() + " " + placaNum.text.toString())
         if(car != null) {
+            getRestrition(car)
             val builder: AlertDialog.Builder = AlertDialog.Builder(context, 16974374)
             builder.setTitle("Información del vehículo\n" +
                     car.marca + " " + car.linea + " " + car.modelo + " " + car.placa)
@@ -182,5 +195,65 @@ class Finder : Fragment(), View.OnClickListener {
         }
     }
     */
+
+    fun addPlc(car: Car){
+        val placa = car.placa
+        Log.d("adding", placa[6].toString())
+        when(placa[6].toString().toInt()){
+
+            0 -> p0.add(placa)
+            1 -> p1.add(placa)
+            2 -> p2.add(placa)
+            3 -> p3.add(placa)
+            4 -> p4.add(placa)
+            5 -> p5.add(placa)
+            6 -> p6.add(placa)
+            7 -> p7.add(placa)
+            8 -> p8.add(placa)
+            9 -> p9.add(placa)
+
+
+        }
+    }
+    fun getRestrition(car: Car) {
+        val day = LocalDateTime.now().dayOfMonth
+
+        when(day % 2){
+            0 -> {
+                val plc = car.placa
+                if(p0.contains(plc) || p2.contains(plc) || p4.contains(plc)
+                        || p6.contains(plc) || p8.contains(plc)
+                ){
+                    val builder: AlertDialog.Builder = AlertDialog.Builder(context, 16974374)
+                    builder.setTitle("¡Ten Cuidado!")
+                    builder.setMessage("Este vehículo tiene restricción de circulación hoy")
+                    builder.setPositiveButton("Cerrar") { dialog, which ->
+                        dialog.dismiss()
+                    }
+                    builder.show()
+
+                }
+            }
+
+            1 -> {
+                val plc = car.placa
+                if(p1.contains(plc) || p3.contains(plc) || p5.contains(plc)
+                        || p7.contains(plc) || p9.contains(plc)
+                ){
+                    val builder: AlertDialog.Builder = AlertDialog.Builder(context, 16974374)
+                    builder.setTitle("Vehículos con restricción de circulación hoy")
+                    builder.setMessage("Este vehículo tiene restricción de circulación hoy")
+                    builder.setPositiveButton("Cerrar") { dialog, which ->
+                        dialog.dismiss()
+                    }
+                    builder.show()
+
+                }
+            }
+
+        }
+
+
+    }
 
 }

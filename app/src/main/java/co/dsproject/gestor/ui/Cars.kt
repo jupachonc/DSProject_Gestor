@@ -21,6 +21,7 @@ import co.dsproject.gestor.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.*
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.Month
 
 
@@ -56,6 +57,17 @@ class Cars : Fragment(), View.OnClickListener {
     private lateinit var mImp: TextView
     private lateinit var uid: String
     private lateinit var mDefault: TextView
+
+    val p0 = HashSet<String>()
+    val p1 = HashSet<String>()
+    val p2 = HashSet<String>()
+    val p3 = HashSet<String>()
+    val p4 = HashSet<String>()
+    val p5 = HashSet<String>()
+    val p6 = HashSet<String>()
+    val p7 = HashSet<String>()
+    val p8 = HashSet<String>()
+    val p9 = HashSet<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -123,6 +135,7 @@ class Cars : Fragment(), View.OnClickListener {
                     for (snapshot in dataSnapshot!!.children) {
                         var car = snapshot.getValue(Car::class.java)
                         listcars.insert(car)
+                        addPlc(car!!)
                     }
                     if(listcars.head != null) head = listcars.head
                     updateUI()
@@ -194,6 +207,7 @@ class Cars : Fragment(), View.OnClickListener {
     @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.O)
     fun updateUI() = if (head != null) {
+        getRestrition()
         updateLayout(View.VISIBLE)
         mPlaca.text = this.head!!.data.placa
         mOwner.text = this.head!!.data.owner
@@ -285,6 +299,66 @@ class Cars : Fragment(), View.OnClickListener {
         mLinea.visibility = flag; mModelo.visibility = flag; mMant.visibility = flag
         mSOAT.visibility = flag; mRTM.visibility = flag; mPoliza.visibility = flag
         mImp.visibility = flag
+
+
+    }
+
+    fun addPlc(car: Car){
+        val placa = car.placa
+        Log.d("adding", placa[6].toString())
+        when(placa[6].toString().toInt()){
+
+            0 -> p0.add(placa)
+            1 -> p1.add(placa)
+            2 -> p2.add(placa)
+            3 -> p3.add(placa)
+            4 -> p4.add(placa)
+            5 -> p5.add(placa)
+            6 -> p6.add(placa)
+            7 -> p7.add(placa)
+            8 -> p8.add(placa)
+            9 -> p9.add(placa)
+
+
+        }
+    }
+    fun getRestrition() {
+        val day = LocalDateTime.now().dayOfMonth
+
+        when(day % 2){
+            0 -> {
+                val plc = head!!.data.placa
+                if(p0.contains(plc) || p2.contains(plc) || p4.contains(plc)
+                        || p6.contains(plc) || p8.contains(plc)
+                ){
+                    val builder: AlertDialog.Builder = AlertDialog.Builder(context, 16974374)
+                    builder.setTitle("¡Ten Cuidado!")
+                    builder.setMessage("Este vehículo tiene restricción de circulación hoy")
+                    builder.setPositiveButton("Cerrar") { dialog, which ->
+                        dialog.dismiss()
+                    }
+                    builder.show()
+
+                }
+            }
+
+            1 -> {
+                val plc = head!!.data.placa
+                if(p1.contains(plc) || p3.contains(plc) || p5.contains(plc)
+                        || p7.contains(plc) || p9.contains(plc)
+                ){
+                    val builder: AlertDialog.Builder = AlertDialog.Builder(context, 16974374)
+                    builder.setTitle("Vehículos con restricción de circulación hoy")
+                    builder.setMessage("Este vehículo tiene restricción de circulación hoy")
+                    builder.setPositiveButton("Cerrar") { dialog, which ->
+                        dialog.dismiss()
+                    }
+                    builder.show()
+
+                }
+            }
+
+        }
 
 
     }

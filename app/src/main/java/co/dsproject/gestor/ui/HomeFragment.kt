@@ -1,5 +1,6 @@
 package co.dsproject.gestor.ui
 
+import android.app.AlertDialog
 import android.app.ProgressDialog
 import android.os.Build
 import android.os.Bundle
@@ -19,6 +20,8 @@ import co.dsproject.gestor.models.TaskModel
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class HomeFragment : Fragment() {
 
@@ -30,8 +33,16 @@ class HomeFragment : Fragment() {
     val rtm = OrderedListTime()
     val pol = OrderedListTime()
     val imp = OrderedListTime()
-    
-    val cars = mutableListOf<Car>()
+    val p0 = HashSet<String>()
+    val p1 = HashSet<String>()
+    val p2 = HashSet<String>()
+    val p3 = HashSet<String>()
+    val p4 = HashSet<String>()
+    val p5 = HashSet<String>()
+    val p6 = HashSet<String>()
+    val p7 = HashSet<String>()
+    val p8 = HashSet<String>()
+    val p9 = HashSet<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,7 +90,7 @@ class HomeFragment : Fragment() {
             override fun onSuccess(dataSnapshot: DataSnapshot?) {
                 for (snapshot in dataSnapshot!!.children) {
                     var car = snapshot.getValue(Car::class.java)
-                    cars.add(car!!)
+                    addPlc(car!!)
                     mant.add(TaskModel(0, car!!.placa,
                             LocalDate.parse(car!!.ultimo_mantenimiento).plusDays(car!!.frecuencia_mantenimiento.toLong())))
                     soat.add(TaskModel(1, car!!.placa, LocalDate.parse(car!!.soat)))
@@ -105,7 +116,8 @@ class HomeFragment : Fragment() {
                 }
 
                 if (dialog.isShowing) {
-                    dialog.dismiss();
+                    dialog.dismiss()
+                    getRestrition()
                 }
 
             }
@@ -135,4 +147,52 @@ class HomeFragment : Fragment() {
         }
         return  list
     }
+
+    fun addPlc(car: Car){
+        val placa = car.placa
+        when(placa[6].toString().toInt()){
+
+            0 -> p0.add(placa)
+            1 -> p1.add(placa)
+            2 -> p2.add(placa)
+            3 -> p3.add(placa)
+            4 -> p4.add(placa)
+            5 -> p5.add(placa)
+            6 -> p6.add(placa)
+            7 -> p7.add(placa)
+            8 -> p8.add(placa)
+            9 -> p9.add(placa)
+
+        }
+    }
+
+    fun getRestrition() {
+        val day = LocalDateTime.now().dayOfMonth
+        var plcs = ""
+        if (day % 2 == 0) {
+            p0.iterator().forEach { plcs += it + "\n" }
+            Log.d("Adding Strings", "Adding Strings")
+            p2.iterator().forEach { plcs += it + "\n" }
+            p4.iterator().forEach { plcs += it + "\n" }
+            p6.iterator().forEach { plcs += it + "\n" }
+            p8.iterator().forEach { plcs += it + "\n" }
+        } else {
+
+            p1.iterator().forEach { plcs += it + "\n" }
+            p3.iterator().forEach { plcs += it + "\n" }
+            p5.iterator().forEach { plcs += it + "\n" }
+            p7.iterator().forEach { plcs += it + "\n" }
+            p9.iterator().forEach { plcs += it + "\n" }
+
+        }
+
+        val builder: AlertDialog.Builder = AlertDialog.Builder(context, 16974374)
+        builder.setTitle("Vehículos con restricción de circulación hoy")
+        builder.setMessage("\n$plcs")
+        builder.setPositiveButton("Cerrar") { dialog, which ->
+            dialog.dismiss()
+        }
+        builder.show()
+    }
 }
+

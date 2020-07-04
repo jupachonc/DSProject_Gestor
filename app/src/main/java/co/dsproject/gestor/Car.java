@@ -2,6 +2,8 @@ package co.dsproject.gestor;
 
 import androidx.annotation.Nullable;
 
+import java.util.Objects;
+
 public class Car implements Comparable<Car> {
 
     private String owner;
@@ -25,6 +27,11 @@ public class Car implements Comparable<Car> {
     @Override
     public boolean equals(@Nullable Object obj) {
         return placa.equals((((Car) obj).placa));
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(placa);
     }
 
     public String getOwner() {
