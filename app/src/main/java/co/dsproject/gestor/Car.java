@@ -31,7 +31,11 @@ public class Car implements Comparable<Car> {
 
     @Override
     public int hashCode() {
-        return Objects.hash(placa);
+        int hashcode = 0;
+        for(int i = 0; i<placa.length(); i++) {
+            hashcode = hashcode + placa.charAt(i);
+        }
+        return hashcode;
     }
 
     public String getOwner() {
