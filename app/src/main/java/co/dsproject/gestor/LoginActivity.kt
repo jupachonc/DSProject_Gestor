@@ -24,8 +24,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var registerButton: Button
     private var flag = false
 
-    lateinit var uid: String
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -48,7 +46,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onStart() {
         super.onStart()
-        val currentUser = auth.currentUser
+        auth.currentUser
 
     }
 
@@ -180,8 +178,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
-        val i = v?.id
-        when(i){
+        when(v?.id){
             R.id.login -> sigIn(fieldEmail.text.toString(), fieldPassword.text.toString())
             R.id.register -> signUp()
         }
@@ -193,7 +190,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             fieldName.visibility = View.GONE
             fieldConfirmPassword.visibility = View.GONE
             flag = false
-            return true;
+            return true
         }
         return  super.onKeyDown(keyCode, event)
 

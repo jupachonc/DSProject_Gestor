@@ -34,11 +34,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        var user: FirebaseUser = intent.extras?.get("user") as FirebaseUser
-        var prefs = getSharedPreferences("user", Context.MODE_PRIVATE)
-        var editor = prefs.edit()
+        val user: FirebaseUser = intent.extras?.get("user") as FirebaseUser
+        val prefs = getSharedPreferences("user", Context.MODE_PRIVATE)
+        val editor = prefs.edit()
         editor.putString("user", user.uid)
-        editor.commit()
+        editor.apply()
         val view: View = findViewById<NavigationView>(R.id.nav_view).getHeaderView(0)
         val emailheader: TextView = view.findViewById(R.id.subtittleheader)
         emailheader.text = user.email

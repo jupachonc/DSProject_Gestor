@@ -35,7 +35,7 @@ class CreateCar : Fragment(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        var prefs = activity?.getSharedPreferences("user", 0)
+        val prefs = activity?.getSharedPreferences("user", 0)
         uid = prefs!!.getString("user", "").toString()
 
 
@@ -72,8 +72,9 @@ class CreateCar : Fragment(), View.OnClickListener {
         return view
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onClick(v: View?) {
-        var i = v?.id
+        val i = v?.id
 
         val c: Calendar = Calendar.getInstance()
         val mYear = c.get(Calendar.YEAR)
@@ -97,7 +98,7 @@ class CreateCar : Fragment(), View.OnClickListener {
             UMant.id -> {
                 val datePickerDialog = ctx?.let {
                     DatePickerDialog(it,
-                            OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                            OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
                                 UMant.setText(year.toString() + "-" + String.format("%02d", (monthOfYear + 1)) +
                                         "-" + String.format("%02d", dayOfMonth))
                             }, mYear, mMonth, mDay)
@@ -108,7 +109,7 @@ class CreateCar : Fragment(), View.OnClickListener {
             SOAT.id -> {
                 val datePickerDialog = ctx?.let {
                     DatePickerDialog(it,
-                            OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                            OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
                                 SOAT.setText(year.toString() + "-" + String.format("%02d", (monthOfYear + 1)) +
                                         "-" + String.format("%02d", dayOfMonth))
                             }, mYear, mMonth, mDay)
@@ -119,7 +120,7 @@ class CreateCar : Fragment(), View.OnClickListener {
             RTM.id -> {
                 val datePickerDialog = ctx?.let {
                     DatePickerDialog(it,
-                            OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                            OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
                                 RTM.setText(year.toString() + "-" + String.format("%02d", (monthOfYear + 1)) +
                                         "-" + String.format("%02d", dayOfMonth))
                             }, mYear, mMonth, mDay)
@@ -131,7 +132,7 @@ class CreateCar : Fragment(), View.OnClickListener {
             Pol.id -> {
                 val datePickerDialog = ctx?.let {
                     DatePickerDialog(it,
-                            OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                            OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
                                 Pol.setText(year.toString() + "-" + String.format("%02d", (monthOfYear + 1)) +
                                         "-" + String.format("%02d", dayOfMonth))
                             }, mYear, mMonth, mDay)
@@ -142,7 +143,7 @@ class CreateCar : Fragment(), View.OnClickListener {
             Imp.id -> {
                 val datePickerDialog = ctx?.let {
                     DatePickerDialog(it,
-                            OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                            OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
                                 Imp.setText(year.toString() + "-" + String.format("%02d", (monthOfYear + 1)) +
                                         "-" + String.format("%02d", dayOfMonth))
                             }, mYear, mMonth, mDay)
@@ -155,7 +156,7 @@ class CreateCar : Fragment(), View.OnClickListener {
     }
 
     private fun saveDb() {
-        val database = FirebaseDatabase.getInstance().reference.child("Users/" + uid + "/Cars").push()
+        val database = FirebaseDatabase.getInstance().reference.child("Users/$uid/Cars").push()
         val car = Car()
         car.placa = nLetPlaca.text.toString() + " " + nNumPlaca.text.toString()
         car.owner = nOwner.text.toString()

@@ -1,8 +1,9 @@
+@file:Suppress("DEPRECATION")
+
 package co.dsproject.gestor.ui
 
 import android.app.AlertDialog
 import android.app.ProgressDialog
-import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -28,22 +29,22 @@ class HomeFragment : Fragment() {
     lateinit var recyclerView: RecyclerView
     lateinit var root: View
     private lateinit var uid: String
-    val mant = OrderedListTime()
-    val soat = OrderedListTime()
-    val rtm = OrderedListTime()
-    val pol = OrderedListTime()
-    val imp = OrderedListTime()
-    val p0 = HashSet<String>()
-    val p1 = HashSet<String>()
-    val p2 = HashSet<String>()
-    val p3 = HashSet<String>()
-    val p4 = HashSet<String>()
-    val p5 = HashSet<String>()
-    val p6 = HashSet<String>()
-    val p7 = HashSet<String>()
-    val p8 = HashSet<String>()
-    val p9 = HashSet<String>()
-    val cars = Lista<Car>()
+    private val mant = OrderedListTime()
+    private val soat = OrderedListTime()
+    private val rtm = OrderedListTime()
+    private val pol = OrderedListTime()
+    private val imp = OrderedListTime()
+    private val p0 = HashSet<String>()
+    private val p1 = HashSet<String>()
+    private val p2 = HashSet<String>()
+    private val p3 = HashSet<String>()
+    private val p4 = HashSet<String>()
+    private val p5 = HashSet<String>()
+    private val p6 = HashSet<String>()
+    private val p7 = HashSet<String>()
+    private val p8 = HashSet<String>()
+    private val p9 = HashSet<String>()
+    private val cars = Lista<Car>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,20 +86,20 @@ class HomeFragment : Fragment() {
     private fun initRecycler(){
 
         val dialog = ProgressDialog(activity, R.style.AppCompatAlertDialogStyle)
-        val database = FirebaseDatabase.getInstance().getReference("Users/" + uid + "/Cars")
+        val database = FirebaseDatabase.getInstance().getReference("Users/$uid/Cars")
         readData(database, object : OnGetDataListener {
             @RequiresApi(Build.VERSION_CODES.O)
             override fun onSuccess(dataSnapshot: DataSnapshot?) {
                 for (snapshot in dataSnapshot!!.children) {
-                    var car = snapshot.getValue(Car::class.java)
+                    val car = snapshot.getValue(Car::class.java)
                     addPlc(car!!)
                     cars.insert(car)
-                    mant.add(TaskModel(0, car!!.placa,
-                            LocalDate.parse(car!!.ultimo_mantenimiento).plusDays(car!!.frecuencia_mantenimiento.toLong())))
-                    soat.add(TaskModel(1, car!!.placa, LocalDate.parse(car!!.soat)))
-                    rtm.add(TaskModel(2, car!!.placa, LocalDate.parse(car!!.rtm)))
-                    pol.add(TaskModel(3, car!!.placa, LocalDate.parse(car!!.poliza)))
-                    imp.add(TaskModel(4, car!!.placa, LocalDate.parse(car!!.impuesto)))
+                    mant.add(TaskModel(0, car.placa,
+                            LocalDate.parse(car.ultimo_mantenimiento).plusDays(car.frecuencia_mantenimiento.toLong())))
+                    soat.add(TaskModel(1, car.placa, LocalDate.parse(car.soat)))
+                    rtm.add(TaskModel(2, car.placa, LocalDate.parse(car.rtm)))
+                    pol.add(TaskModel(3, car.placa, LocalDate.parse(car.poliza)))
+                    imp.add(TaskModel(4, car.placa, LocalDate.parse(car.impuesto)))
                 }
 
 
@@ -126,7 +127,7 @@ class HomeFragment : Fragment() {
 
             override fun onStart() {
                 Log.d("ONSTART", "Started")
-                dialog.setMessage("Cargando los vehículos, por favor espere");
+                dialog.setMessage("Cargando los vehículos, por favor espere")
                 dialog.show()
             }
 
@@ -191,7 +192,7 @@ class HomeFragment : Fragment() {
         val builder: AlertDialog.Builder = AlertDialog.Builder(context, 16974374)
         builder.setTitle("Vehículos con restricción de circulación hoy")
         builder.setMessage("\n$plcs")
-        builder.setPositiveButton("Cerrar") { dialog, which ->
+        builder.setPositiveButton("Cerrar") { dialog, _ ->
             dialog.dismiss()
         }
         if(plcs != "") builder.show()

@@ -5,6 +5,7 @@ import android.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
@@ -34,7 +35,7 @@ class ChildAdapter(private val children : MutableList<TaskModel>, private val ca
         return children.size
     }
 
-    @SuppressLint("ResourceAsColor")
+    @SuppressLint("ResourceAsColor", "SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder,
                                   position: Int) {
         val child = children[position]
@@ -61,7 +62,7 @@ class ChildAdapter(private val children : MutableList<TaskModel>, private val ca
             builder.setTitle("Confirmar")
             val message = "Realizó " + getType(child) + " en " + holder.textView.text.toString()
             builder.setMessage(message)
-            builder.setPositiveButton("Confirmar"){ dialog, which ->
+            builder.setPositiveButton("Confirmar"){ dialog, _ ->
                 updateCar(child)
                 updateCarsDB()
                 removeAt(position)
@@ -70,7 +71,7 @@ class ChildAdapter(private val children : MutableList<TaskModel>, private val ca
                 dialog.dismiss()
             }
 
-            builder.setNegativeButton("Cancelar"){ dialog, which ->
+            builder.setNegativeButton("Cancelar"){ dialog, _ ->
                     dialog.dismiss()
             }
             builder.show()
@@ -82,14 +83,13 @@ class ChildAdapter(private val children : MutableList<TaskModel>, private val ca
     inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
 
         val textView : TextView = itemView.child_textView
-        val tv = itemView.child_days
-        val container = itemView.linearchild
-
+        val tv: TextView = itemView.child_days
+        val container: LinearLayout = itemView.linearchild
 
     }
 
     private fun updateCarsDB(){
-        val database = FirebaseDatabase.getInstance().getReference("Users/" + uid + "/Cars")
+        val database = FirebaseDatabase.getInstance().getReference("Users/$uid/Cars")
         database.removeValue()
         var ptr = cars.head
         while(ptr != null){
@@ -98,72 +98,36 @@ class ChildAdapter(private val children : MutableList<TaskModel>, private val ca
         }
     }
 
-    fun removeAt(position: Int) {
+    private fun removeAt(position: Int) {
         children.removeAt(position)
         notifyItemRemoved(position)
         notifyItemRangeChanged(position, children.size)
     }
 
-    fun updateCar(child: TaskModel){
-
+    private fun updateCar(child: TaskModel){
         val car = cars.getItem(Car(child.placa))
 
         when(child.tipo){
-            0 -> {
-                car.ultimo_mantenimiento = LocalDate.now().toString()
-            }
-
-            1 -> {
-                car.soat = LocalDate.now().plusYears(1).toString()
-
-            }
-
-            2 -> {
-                car.rtm = LocalDate.now().plusYears(1).toString()
-
-            }
-
-            3 -> {
-                car.poliza = LocalDate.now().plusYears(1).toString()
-
-            }
-
-            4 -> {
-
-                car.impuesto = LocalDate.parse(car.impuesto).plusYears(1).toString()
-
-            }
+            0 -> car.ultimo_mantenimiento = LocalDate.now().toString()
+            1 -> car.soat = LocalDate.now().plusYears(1).toString()
+            2 -> car.rtm = LocalDate.now().plusYears(1).toString()
+            3 -> car.poliza = LocalDate.now().plusYears(1).toString()
+            4 -> car.impuesto = LocalDate.parse(car.impuesto).plusYears(1).toString()
         }
-        FirebaseDatabase.getInstance().getReference("Users/" + uid + "/History").push()
+
+        FirebaseDatabase.getInstance().getReference("Users/$uid/History").push()
                 .setValue(TaskModel(child.tipo, child.placa, LocalDate.now()))
 
 
     }
 
-    fun getType(child: TaskModel): String{
-        when(child.tipo){
-            0 -> {
-                return "Mantenimiento"
-            }
-
-            1 -> {
-                return "Renovación SOAT"
-            }
-
-            2 -> {
-                return "Revisión Técnico-Mecánica"
-            }
-
-            3 -> {
-                return  "Renovación Póliza"
-            }
-
-            4 -> {
-                return "Pago de Impuesto"
-            }
-        }
-
-        return  ""
+    private fun getType(child: TaskModel) = when(child.tipo){
+        0 -> "Mantenimiento"
+        1 -> "Renovación SOAT"
+        2 -> "Revisión Técnico-Mecánica"
+        3 -> "Renovación Póliza"
+        4 -> "Pago de Impuesto"
+        else -> ""
     }
 
 

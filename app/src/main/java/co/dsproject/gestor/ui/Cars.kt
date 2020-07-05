@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package co.dsproject.gestor.ui
 
 import android.annotation.SuppressLint
@@ -19,23 +21,23 @@ import co.dsproject.gestor.DoubleNode
 import co.dsproject.gestor.Lista
 import co.dsproject.gestor.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.*
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.Month
 
 
+@Suppress("DEPRECATION")
 class Cars : Fragment(), View.OnClickListener {
-    private var param1: String? = null
-    private var param2: String? = null
     private var listcars = Lista<Car>()
     private var head: DoubleNode<Car>? = null
     private lateinit var newcar: FloatingActionButton
     private lateinit var backbtn: FloatingActionButton
     private lateinit var nextbtn: FloatingActionButton
     private lateinit var deletebtn: FloatingActionButton
-    private lateinit var title_1 : TextView
-    private lateinit var title_2 : TextView
+    private lateinit var title : TextView
+    private lateinit var title2 : TextView
     private lateinit var iOwner: TextView
     private lateinit var iMarca: TextView
     private lateinit var iLinea: TextView
@@ -57,17 +59,18 @@ class Cars : Fragment(), View.OnClickListener {
     private lateinit var mImp: TextView
     private lateinit var uid: String
     private lateinit var mDefault: TextView
+    private lateinit var v: View
 
-    val p0 = HashSet<String>()
-    val p1 = HashSet<String>()
-    val p2 = HashSet<String>()
-    val p3 = HashSet<String>()
-    val p4 = HashSet<String>()
-    val p5 = HashSet<String>()
-    val p6 = HashSet<String>()
-    val p7 = HashSet<String>()
-    val p8 = HashSet<String>()
-    val p9 = HashSet<String>()
+    private val p0 = HashSet<String>()
+    private val p1 = HashSet<String>()
+    private val p2 = HashSet<String>()
+    private val p3 = HashSet<String>()
+    private val p4 = HashSet<String>()
+    private val p5 = HashSet<String>()
+    private val p6 = HashSet<String>()
+    private val p7 = HashSet<String>()
+    private val p8 = HashSet<String>()
+    private val p9 = HashSet<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,41 +82,41 @@ class Cars : Fragment(), View.OnClickListener {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_cars, container, false)
+        v = inflater.inflate(R.layout.fragment_cars, container, false)
 
 
         //Buttons
-        newcar = view.findViewById(R.id.nuevo_carro)
-        backbtn = view.findViewById(R.id.BackButton)
-        nextbtn = view.findViewById(R.id.NextButton)
-        deletebtn = view.findViewById(R.id.delete)
+        newcar = v.findViewById(R.id.nuevo_carro)
+        backbtn = v.findViewById(R.id.BackButton)
+        nextbtn = v.findViewById(R.id.NextButton)
+        deletebtn = v.findViewById(R.id.delete)
 
         //Tags
-        title_1 = view.findViewById(R.id.Tittle_1)
-        title_2 = view.findViewById(R.id.Tittle_2)
-        iOwner = view.findViewById(R.id.Propietario_id)
-        iMarca = view.findViewById(R.id.Marca)
-        iLinea = view.findViewById(R.id.Linea_id)
-        iModelo = view.findViewById(R.id.Modelo_id)
-        iMant = view.findViewById(R.id.Mant_id)
-        iSOAT = view.findViewById(R.id.SOAT_id)
-        iRTM = view.findViewById(R.id.RTM_id)
-        iPoliza = view.findViewById(R.id.Poliza_id)
-        iImp = view.findViewById(R.id.Impuesto_id)
+        title = v.findViewById(R.id.Tittle_1)
+        title2 = v.findViewById(R.id.Tittle_2)
+        iOwner = v.findViewById(R.id.Propietario_id)
+        iMarca = v.findViewById(R.id.Marca)
+        iLinea = v.findViewById(R.id.Linea_id)
+        iModelo = v.findViewById(R.id.Modelo_id)
+        iMant = v.findViewById(R.id.Mant_id)
+        iSOAT = v.findViewById(R.id.SOAT_id)
+        iRTM = v.findViewById(R.id.RTM_id)
+        iPoliza = v.findViewById(R.id.Poliza_id)
+        iImp = v.findViewById(R.id.Impuesto_id)
 
 
         //Atributtes
-        mPlaca = view.findViewById(R.id.Placa)
-        mOwner = view.findViewById(R.id.propietario_name)
-        mMarca = view.findViewById(R.id.Marca_name)
-        mLinea = view.findViewById(R.id.Linea_name)
-        mModelo = view.findViewById(R.id.Modelo_int)
-        mMant = view.findViewById(R.id.Mant_date)
-        mSOAT = view.findViewById(R.id.SOAT_date)
-        mRTM = view.findViewById(R.id.RTM_date)
-        mPoliza = view.findViewById(R.id.Poliza_date)
-        mImp = view.findViewById(R.id.Impuesto_date)
-        mDefault = view.findViewById(R.id.message)
+        mPlaca = v.findViewById(R.id.Placa)
+        mOwner = v.findViewById(R.id.propietario_name)
+        mMarca = v.findViewById(R.id.Marca_name)
+        mLinea = v.findViewById(R.id.Linea_name)
+        mModelo = v.findViewById(R.id.Modelo_int)
+        mMant = v.findViewById(R.id.Mant_date)
+        mSOAT = v.findViewById(R.id.SOAT_date)
+        mRTM = v.findViewById(R.id.RTM_date)
+        mPoliza = v.findViewById(R.id.Poliza_date)
+        mImp = v.findViewById(R.id.Impuesto_date)
+        mDefault = v.findViewById(R.id.message)
 
 
         //Listeners
@@ -122,31 +125,31 @@ class Cars : Fragment(), View.OnClickListener {
         nextbtn.setOnClickListener(this)
         deletebtn.setOnClickListener(this)
 
-        return view
+        return v
     }
 
     override fun onStart() {
         super.onStart()
         if(listcars.head == null) {
             val dialog = ProgressDialog(activity, R.style.AppCompatAlertDialogStyle)
-            val database = FirebaseDatabase.getInstance().getReference("Users/" + uid + "/Cars")
+            val database = FirebaseDatabase.getInstance().getReference("Users/$uid/Cars")
             readData(database, object : OnGetDataListener {
                 override fun onSuccess(dataSnapshot: DataSnapshot?) {
                     for (snapshot in dataSnapshot!!.children) {
-                        var car = snapshot.getValue(Car::class.java)
+                        val car = snapshot.getValue(Car::class.java)
                         listcars.insert(car)
                         addPlc(car!!)
                     }
                     if(listcars.head != null) head = listcars.head
                     updateUI()
                     if (dialog.isShowing) {
-                        dialog.dismiss();
+                        dialog.dismiss()
                     }
                 }
 
                 override fun onStart() {
                     Log.d("ONSTART", "Started")
-                    dialog.setMessage("Cargando los vehículos, por favor espere");
+                    dialog.setMessage("Cargando los vehículos, por favor espere")
                     dialog.show()
                 }
 
@@ -162,8 +165,7 @@ class Cars : Fragment(), View.OnClickListener {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onClick(v: View?) {
         if(head != null){
-        val i = v!!.id
-        when(i){
+            when(v!!.id){
             nextbtn.id -> if(head!!.next != null){
                 head = head!!.next
                 updateUI()
@@ -186,14 +188,14 @@ class Cars : Fragment(), View.OnClickListener {
                 val builder: AlertDialog.Builder = AlertDialog.Builder(context, 16974374)
                 builder.setTitle(getString(R.string.AlertDialog_DE))
                 builder.setMessage("El vehículo con placa " + head!!.data.placa + " va a ser eliminado.")
-                builder.setPositiveButton("Aceptar"){ dialog, which ->
+                builder.setPositiveButton("Aceptar"){ _, _ ->
                     listcars.delete(head!!.data)
                     updateCarsDB()
                     head = listcars.head
                     updateUI()
                     Toast.makeText(context, "Vehículo eliminado", Toast.LENGTH_SHORT).show()
                 }
-                builder.setNegativeButton(android.R.string.no) { dialog, which ->
+                builder.setNegativeButton(android.R.string.no) { dialog, _ ->
                     dialog.dismiss()
                 }
                 builder.show()
@@ -215,15 +217,15 @@ class Cars : Fragment(), View.OnClickListener {
         mLinea.text = this.head!!.data.linea
         mModelo.text = this.head!!.data.modelo.toString()
         val fMant = LocalDate.parse(head!!.data.ultimo_mantenimiento).plusDays(head!!.data.frecuencia_mantenimiento.toLong())
-        mMant.text = FechaLarga(fMant)
+        mMant.text = fFechaLarga(fMant)
         val fSOAT = LocalDate.parse(head!!.data.soat)
-        mSOAT.text = FechaLarga(fSOAT)
+        mSOAT.text = fFechaLarga(fSOAT)
         val fRTM = LocalDate.parse(head!!.data.rtm)
-        mRTM.text = FechaLarga(fRTM)
+        mRTM.text = fFechaLarga(fRTM)
         val fPol = LocalDate.parse(head!!.data.poliza)
-        mPoliza.text = FechaLarga(fPol)
+        mPoliza.text = fFechaLarga(fPol)
         val fImp = LocalDate.parse(head!!.data.impuesto)
-        mImp.text = FechaLarga(fImp)
+        mImp.text = fFechaLarga(fImp)
 
     } else {
         updateLayout(View.GONE)
@@ -231,12 +233,12 @@ class Cars : Fragment(), View.OnClickListener {
 
     }
     @RequiresApi(Build.VERSION_CODES.O)
-    fun FechaLarga(date : LocalDate): String{
-        return date.dayOfMonth.toString() + " de " + NombreMes(date.month) + " del " + date.year
+    fun fFechaLarga(date : LocalDate): String{
+        return date.dayOfMonth.toString() + " de " + fNombredeMes(date.month) + " del " + date.year
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun NombreMes(m: Month) = when(m){
+    fun fNombredeMes(m: Month) = when(m){
         Month.JANUARY -> "Enero"
         Month.FEBRUARY -> "Febrero"
         Month.MARCH -> "Marzo"
@@ -270,7 +272,7 @@ class Cars : Fragment(), View.OnClickListener {
     }
 
     private fun updateCarsDB(){
-        val database = FirebaseDatabase.getInstance().getReference("Users/" + uid + "/Cars")
+        val database = FirebaseDatabase.getInstance().getReference("Users/$uid/Cars")
         database.removeValue()
         var ptr = listcars.head
         while(ptr != null){
@@ -288,7 +290,7 @@ class Cars : Fragment(), View.OnClickListener {
         }
 
         newcar.visibility = flag; backbtn.visibility = flag; nextbtn.visibility = flag
-        deletebtn.visibility = flag; title_1.visibility = flag; title_2.visibility = flag
+        deletebtn.visibility = flag; title.visibility = flag; title2.visibility = flag
         iOwner.visibility = flag; iMarca.visibility = flag; iLinea.visibility = flag
         iModelo.visibility = flag; iMant.visibility = flag; iSOAT.visibility = flag
         iRTM.visibility = flag; iPoliza.visibility = flag; iImp.visibility = flag
@@ -319,7 +321,7 @@ class Cars : Fragment(), View.OnClickListener {
 
         }
     }
-    fun getRestrition() {
+    private fun getRestrition() {
         val day = LocalDateTime.now().dayOfMonth
 
         when(day % 2){
@@ -342,14 +344,18 @@ class Cars : Fragment(), View.OnClickListener {
 
     }
 
-    fun alertshow(){
+    private fun alertshow(){
+        Snackbar.make(v, "¡Ten Cuidado!\nEste vehículo tiene restricción de circulación hoy", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show()
+        /*
         val builder: AlertDialog.Builder = AlertDialog.Builder(context, 16974374)
         builder.setTitle("¡Ten Cuidado!")
         builder.setMessage("Este vehículo tiene restricción de circulación hoy")
-        builder.setPositiveButton("Cerrar") { dialog, which ->
+        builder.setPositiveButton("Cerrar") { dialog, _ ->
             dialog.dismiss()
         }
         builder.show()
+         */
     }
 
 

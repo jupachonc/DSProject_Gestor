@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package co.dsproject.gestor.ui
 
 import android.annotation.SuppressLint
@@ -13,7 +15,6 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import co.dsproject.gestor.Car
 import co.dsproject.gestor.Pila
 import co.dsproject.gestor.R
 import co.dsproject.gestor.models.TaskModel
@@ -24,9 +25,9 @@ import java.time.Month
 
 class History : Fragment(), View.OnClickListener {
 
-    private var MainStack = Pila<TaskModel>()
-    private var AuxStack = Pila<TaskModel>()
-    private var MainTask: TaskModel? = null
+    private var mainStack = Pila<TaskModel>()
+    private var auxStack = Pila<TaskModel>()
+    private var mainTask: TaskModel? = null
     private lateinit var uid: String
     private lateinit var title: TextView
     private lateinit var description: TextView
@@ -54,26 +55,26 @@ class History : Fragment(), View.OnClickListener {
     override fun onStart() {
         super.onStart()
             val dialog = ProgressDialog(activity, R.style.AppCompatAlertDialogStyle)
-            val database = FirebaseDatabase.getInstance().getReference("Users/" + uid + "/History")
+            val database = FirebaseDatabase.getInstance().getReference("Users/$uid/History")
             readData(database, object : OnGetDataListener {
                 override fun onSuccess(dataSnapshot: DataSnapshot?) {
                     for (snapshot in dataSnapshot!!.children) {
-                        var task = snapshot.getValue(TaskModel::class.java)
-                        AuxStack.push(task)
+                        val task: TaskModel? = snapshot.getValue(TaskModel::class.java)
+                        auxStack.push(task)
                     }
-                    while(!AuxStack.empty()){
-                        MainStack.push(AuxStack.pop())
+                    while(!auxStack.empty()){
+                        mainStack.push(auxStack.pop())
                     }
-                    if(!MainStack.empty()) MainTask = MainStack.pop()
-                    if(MainTask != null) updateUI()
+                    if(!mainStack.empty()) mainTask = mainStack.pop()
+                    if(mainTask != null) updateUI()
                     if (dialog.isShowing) {
-                        dialog.dismiss();
+                        dialog.dismiss()
                     }
                 }
 
                 override fun onStart() {
                     Log.d("ONSTART", "Started")
-                    dialog.setMessage("Cargando los vehículos, por favor espere");
+                    dialog.setMessage("Cargando el historial, por favor espere")
                     dialog.show()
                 }
 
@@ -103,51 +104,34 @@ class History : Fragment(), View.OnClickListener {
 
     @SuppressLint("SetTextI18n")
     private fun updateUI(){
-        title.text = getType(MainTask!!) + "\n" + MainTask!!.placa.toString()
-        description.text = "Realizado el " + FechaLarga(LocalDate.parse(MainTask!!.fecha))
+        title.text = getType(mainTask!!) + "\n" + mainTask!!.placa.toString()
+        description.text = "Realizado el " + fechaLarga(LocalDate.parse(mainTask!!.fecha))
 
     }
 
     override fun onClick(v: View?) {
-        MainTask = MainStack.pop()
-        if(MainTask != null) updateUI()
+        mainTask = mainStack.pop()
+        if(mainTask != null) updateUI()
         else
             Toast.makeText(context, "No hay más tareas realizadas", Toast.LENGTH_SHORT).show()
     }
 
-    fun getType(child: TaskModel): String{
-        when(child.tipo){
-            0 -> {
-                return "Mantenimiento"
-            }
-
-            1 -> {
-                return "Renovación SOAT"
-            }
-
-            2 -> {
-                return "Revisión Técnico-Mecánica"
-            }
-
-            3 -> {
-                return  "Renovación Póliza"
-            }
-
-            4 -> {
-                return "Pago de Impuesto"
-            }
-        }
-
-        return  ""
+    private fun getType(child: TaskModel) = when(child.tipo){
+        0 -> "Mantenimiento"
+        1 -> "Renovación SOAT"
+        2 -> "Revisión Técnico-Mecánica"
+        3 -> "Renovación Póliza"
+        4 -> "Pago de Impuesto"
+        else -> ""
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun FechaLarga(date : LocalDate): String{
-        return date.dayOfMonth.toString() + " de " + NombreMes(date.month) + " del " + date.year
+    fun fechaLarga(date : LocalDate): String{
+        return date.dayOfMonth.toString() + " de " + fNombreMes(date.month) + " del " + date.year
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun NombreMes(m: Month) = when(m){
+    fun fNombreMes(m: Month) = when(m){
         Month.JANUARY -> "Enero"
         Month.FEBRUARY -> "Febrero"
         Month.MARCH -> "Marzo"

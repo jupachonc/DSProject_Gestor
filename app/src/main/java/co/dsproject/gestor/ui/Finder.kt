@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package co.dsproject.gestor.ui
 
 import android.app.AlertDialog
@@ -17,7 +19,6 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import co.dsproject.gestor.BstCar
 import co.dsproject.gestor.Car
-import co.dsproject.gestor.Lista
 import co.dsproject.gestor.R
 import com.google.firebase.database.*
 import java.time.LocalDate
@@ -33,18 +34,16 @@ class Finder : Fragment(), View.OnClickListener {
     private lateinit var searchButton: Button
     private lateinit var placaChar: EditText
     private lateinit var placaNum: EditText
-    private lateinit var database: DatabaseReference
-    private var listCars = Lista<Car>()
-    val p0 = HashSet<String>()
-    val p1 = HashSet<String>()
-    val p2 = HashSet<String>()
-    val p3 = HashSet<String>()
-    val p4 = HashSet<String>()
-    val p5 = HashSet<String>()
-    val p6 = HashSet<String>()
-    val p7 = HashSet<String>()
-    val p8 = HashSet<String>()
-    val p9 = HashSet<String>()
+    private val p0 = HashSet<String>()
+    private val p1 = HashSet<String>()
+    private val p2 = HashSet<String>()
+    private val p3 = HashSet<String>()
+    private val p4 = HashSet<String>()
+    private val p5 = HashSet<String>()
+    private val p6 = HashSet<String>()
+    private val p7 = HashSet<String>()
+    private val p8 = HashSet<String>()
+    private val p9 = HashSet<String>()
 
 
 
@@ -75,24 +74,24 @@ class Finder : Fragment(), View.OnClickListener {
     override fun onStart() {
         super.onStart()
         val dialog = ProgressDialog(activity, R.style.AppCompatAlertDialogStyle)
-        val database = FirebaseDatabase.getInstance().getReference("Users/" + uid + "/Cars")
+        val database = FirebaseDatabase.getInstance().getReference("Users/$uid/Cars")
         readData(database, object : OnGetDataListener {
             override fun onSuccess(dataSnapshot: DataSnapshot?) {
                 for (snapshot in dataSnapshot!!.children) {
-                    var car = snapshot.getValue(Car::class.java)
+                    val car = snapshot.getValue(Car::class.java)
                     bstCars.insertBST(car)
                     addPlc(car!!)
                 }
                 if(null == bstCars.root){delfaultM.visibility = View.VISIBLE; mainCons.visibility = View.GONE}
                 else{delfaultM.visibility = View.GONE; mainCons.visibility = View.VISIBLE}
                 if (dialog.isShowing) {
-                    dialog.dismiss();
+                    dialog.dismiss()
                 }
             }
 
             override fun onStart() {
                 Log.d("ONSTART", "Started")
-                dialog.setMessage("Cargando los vehículos, por favor espere");
+                dialog.setMessage("Cargando los vehículos, por favor espere")
                 dialog.show()
             }
 
@@ -121,8 +120,7 @@ class Finder : Fragment(), View.OnClickListener {
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onClick(v: View?) {
-        val i = v!!.id
-        when(i){
+        when(v!!.id){
             searchButton.id -> search()
         }
     }
@@ -146,7 +144,7 @@ class Finder : Fragment(), View.OnClickListener {
                     "\nPóliza: " + LocalDate.parse(car.poliza).format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) +
                     "\nImpuesto: " + LocalDate.parse(car.impuesto).format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
             builder.setMessage(message)
-            builder.setPositiveButton("Cerrar"){ dialog, which ->
+            builder.setPositiveButton("Cerrar"){ dialog, _ ->
                     dialog.dismiss()
             }
             /*
@@ -215,7 +213,7 @@ class Finder : Fragment(), View.OnClickListener {
 
         }
     }
-    fun getRestrition(car: Car) {
+    private fun getRestrition(car: Car) {
         val day = LocalDateTime.now().dayOfMonth
 
         when(day % 2){
@@ -238,11 +236,11 @@ class Finder : Fragment(), View.OnClickListener {
 
     }
 
-    fun alertshow(){
+    private fun alertshow(){
         val builder: AlertDialog.Builder = AlertDialog.Builder(context, 16974374)
         builder.setTitle("¡Ten Cuidado!")
         builder.setMessage("Este vehículo tiene restricción de circulación hoy")
-        builder.setPositiveButton("Cerrar") { dialog, which ->
+        builder.setPositiveButton("Cerrar") { dialog, _ ->
             dialog.dismiss()
         }
         builder.show()

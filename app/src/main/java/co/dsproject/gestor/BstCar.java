@@ -3,7 +3,7 @@ package co.dsproject.gestor;
 public class BstCar {
 
     //Inner Class: Node
-    public class Node {
+    public static class Node {
         private Node left;
         private Car data;
         private Node right;
