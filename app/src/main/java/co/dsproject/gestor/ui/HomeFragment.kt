@@ -2,6 +2,7 @@ package co.dsproject.gestor.ui
 
 import android.app.AlertDialog
 import android.app.ProgressDialog
+import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -21,7 +22,6 @@ import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import java.time.LocalDate
 import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
 class HomeFragment : Fragment() {
 
@@ -43,6 +43,7 @@ class HomeFragment : Fragment() {
     val p7 = HashSet<String>()
     val p8 = HashSet<String>()
     val p9 = HashSet<String>()
+    val cars = Lista<Car>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -91,6 +92,7 @@ class HomeFragment : Fragment() {
                 for (snapshot in dataSnapshot!!.children) {
                     var car = snapshot.getValue(Car::class.java)
                     addPlc(car!!)
+                    cars.insert(car)
                     mant.add(TaskModel(0, car!!.placa,
                             LocalDate.parse(car!!.ultimo_mantenimiento).plusDays(car!!.frecuencia_mantenimiento.toLong())))
                     soat.add(TaskModel(1, car!!.placa, LocalDate.parse(car!!.soat)))
@@ -112,7 +114,7 @@ class HomeFragment : Fragment() {
                 recyclerView.apply {
                     layoutManager = LinearLayoutManager(context,
                             RecyclerView.VERTICAL, false)
-                    adapter = ParentAdapter(lista)
+                    adapter = ParentAdapter(lista, cars, uid)
                 }
 
                 if (dialog.isShowing) {
@@ -192,7 +194,9 @@ class HomeFragment : Fragment() {
         builder.setPositiveButton("Cerrar") { dialog, which ->
             dialog.dismiss()
         }
-        builder.show()
+        if(plcs != "") builder.show()
     }
+
+
 }
 

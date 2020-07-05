@@ -14,6 +14,7 @@
 
 
     <LinearLayout
+        android:id="@+id/linearchild"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:orientation="vertical">

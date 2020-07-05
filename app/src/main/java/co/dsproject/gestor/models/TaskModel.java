@@ -7,12 +7,15 @@ public class TaskModel implements Comparable<TaskModel> {
 
     int tipo;
     String placa;
-    LocalDate fecha;
+    String fecha;
 
     public TaskModel(int tipo, String placa, LocalDate fecha) {
         this.tipo = tipo;
         this.placa = placa;
-        this.fecha = fecha;
+        this.fecha = fecha.toString();
+    }
+
+    public TaskModel() {
     }
 
     @Override
@@ -43,7 +46,7 @@ public class TaskModel implements Comparable<TaskModel> {
         return placa;
     }
 
-    public LocalDate getFecha() {
+    public String getFecha() {
         return fecha;
     }
 }

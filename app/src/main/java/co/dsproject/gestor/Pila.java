@@ -21,7 +21,7 @@ public class Pila<T extends Comparable> {
 
     }
     public T pop(){
-        if(empty()) throw new RuntimeException("Stack is empty");
+        if(empty()) return null;
         T data = top.getData();
         top = top.getNext();
         return data;

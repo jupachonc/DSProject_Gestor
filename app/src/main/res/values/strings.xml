@@ -35,4 +35,5 @@
     <string name="AlertDialog_DE">¿Desea eliminar el vehículo?</string>
     <string name="create_car">Crea un vehículo para empezar a usar la app</string>
     <string name="search_car">Buscar Vehículo</string>
+    <string name="history">Historial</string>
 </resources>

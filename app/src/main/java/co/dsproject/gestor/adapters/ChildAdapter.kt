@@ -1,21 +1,26 @@
 package co.dsproject.gestor.adapters
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import co.dsproject.gestor.Car
+import co.dsproject.gestor.Lista
 import co.dsproject.gestor.R
 import co.dsproject.gestor.models.TaskModel
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.child_recycler.view.*
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit
 
-
-
-class ChildAdapter(private val children : List<TaskModel>)
+class ChildAdapter(private val children : MutableList<TaskModel>, private val cars: Lista<Car>, private  val uid: String)
     : RecyclerView.Adapter<ChildAdapter.ViewHolder>(){
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup,
                                     viewType: Int): ViewHolder {
@@ -36,7 +41,7 @@ class ChildAdapter(private val children : List<TaskModel>)
         //holder.imageView.setImageResource(child.image)
         holder.textView.text = child.placa
 
-        val days = LocalDate.now().until(child.fecha, ChronoUnit.DAYS)
+        val days = LocalDate.now().until(LocalDate.parse(child.fecha), ChronoUnit.DAYS)
 
         holder.tv.text = "$days\nDías Restantes"
 
@@ -51,6 +56,26 @@ class ChildAdapter(private val children : List<TaskModel>)
             4 -> holder.textView.setBackgroundResource(R.drawable.lightamber)
         }
 
+        holder.container.setOnClickListener{
+            val builder: AlertDialog.Builder = AlertDialog.Builder(holder.container.context, 16974374)
+            builder.setTitle("Confirmar")
+            val message = "Realizó " + getType(child) + " en " + holder.textView.text.toString()
+            builder.setMessage(message)
+            builder.setPositiveButton("Confirmar"){ dialog, which ->
+                updateCar(child)
+                updateCarsDB()
+                removeAt(position)
+                notifyDataSetChanged()
+                Toast.makeText(holder.container.context, "Se ha actualizado la información de su vehículo",Toast.LENGTH_SHORT).show()
+                dialog.dismiss()
+            }
+
+            builder.setNegativeButton("Cancelar"){ dialog, which ->
+                    dialog.dismiss()
+            }
+            builder.show()
+
+        }
     }
 
 
@@ -58,7 +83,88 @@ class ChildAdapter(private val children : List<TaskModel>)
 
         val textView : TextView = itemView.child_textView
         val tv = itemView.child_days
-        //val imageView: ImageView = itemView.child_imageView
+        val container = itemView.linearchild
+
 
     }
+
+    private fun updateCarsDB(){
+        val database = FirebaseDatabase.getInstance().getReference("Users/" + uid + "/Cars")
+        database.removeValue()
+        var ptr = cars.head
+        while(ptr != null){
+            database.push().setValue(ptr.data)
+            ptr = ptr.next
+        }
+    }
+
+    fun removeAt(position: Int) {
+        children.removeAt(position)
+        notifyItemRemoved(position)
+        notifyItemRangeChanged(position, children.size)
+    }
+
+    fun updateCar(child: TaskModel){
+
+        val car = cars.getItem(Car(child.placa))
+
+        when(child.tipo){
+            0 -> {
+                car.ultimo_mantenimiento = LocalDate.now().toString()
+            }
+
+            1 -> {
+                car.soat = LocalDate.now().plusYears(1).toString()
+
+            }
+
+            2 -> {
+                car.rtm = LocalDate.now().plusYears(1).toString()
+
+            }
+
+            3 -> {
+                car.poliza = LocalDate.now().plusYears(1).toString()
+
+            }
+
+            4 -> {
+
+                car.impuesto = LocalDate.parse(car.impuesto).plusYears(1).toString()
+
+            }
+        }
+        FirebaseDatabase.getInstance().getReference("Users/" + uid + "/History").push()
+                .setValue(TaskModel(child.tipo, child.placa, LocalDate.now()))
+
+
+    }
+
+    fun getType(child: TaskModel): String{
+        when(child.tipo){
+            0 -> {
+                return "Mantenimiento"
+            }
+
+            1 -> {
+                return "Renovación SOAT"
+            }
+
+            2 -> {
+                return "Revisión Técnico-Mecánica"
+            }
+
+            3 -> {
+                return  "Renovación Póliza"
+            }
+
+            4 -> {
+                return "Pago de Impuesto"
+            }
+        }
+
+        return  ""
+    }
+
+
 }

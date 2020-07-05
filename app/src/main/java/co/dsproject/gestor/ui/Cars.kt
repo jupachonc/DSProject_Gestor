@@ -236,22 +236,19 @@ class Cars : Fragment(), View.OnClickListener {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun NombreMes(m: Month): String{
-        when(m){
-            Month.JANUARY -> return "Enero"
-            Month.FEBRUARY -> return "Febrero"
-            Month.MARCH -> return  "Marzo"
-            Month.APRIL -> return "Abril"
-            Month.MAY -> return "Mayo"
-            Month.JUNE -> return "Junio"
-            Month.JULY -> return "Julio"
-            Month.AUGUST -> return "Agosto"
-            Month.SEPTEMBER -> return "Septiembre"
-            Month.OCTOBER -> return "Octubre"
-            Month.NOVEMBER -> return "Noviembre"
-            Month.DECEMBER -> return "Diciembre"
-        }
-
+    fun NombreMes(m: Month) = when(m){
+        Month.JANUARY -> "Enero"
+        Month.FEBRUARY -> "Febrero"
+        Month.MARCH -> "Marzo"
+        Month.APRIL -> "Abril"
+        Month.MAY -> "Mayo"
+        Month.JUNE -> "Junio"
+        Month.JULY -> "Julio"
+        Month.AUGUST -> "Agosto"
+        Month.SEPTEMBER -> "Septiembre"
+        Month.OCTOBER -> "Octubre"
+        Month.NOVEMBER -> "Noviembre"
+        Month.DECEMBER -> "Diciembre"
     }
 
     interface OnGetDataListener {
@@ -330,37 +327,29 @@ class Cars : Fragment(), View.OnClickListener {
                 val plc = head!!.data.placa
                 if(p0.contains(plc) || p2.contains(plc) || p4.contains(plc)
                         || p6.contains(plc) || p8.contains(plc)
-                ){
-                    val builder: AlertDialog.Builder = AlertDialog.Builder(context, 16974374)
-                    builder.setTitle("¡Ten Cuidado!")
-                    builder.setMessage("Este vehículo tiene restricción de circulación hoy")
-                    builder.setPositiveButton("Cerrar") { dialog, which ->
-                        dialog.dismiss()
-                    }
-                    builder.show()
-
-                }
+                ) alertshow()
             }
 
             1 -> {
                 val plc = head!!.data.placa
                 if(p1.contains(plc) || p3.contains(plc) || p5.contains(plc)
                         || p7.contains(plc) || p9.contains(plc)
-                ){
-                    val builder: AlertDialog.Builder = AlertDialog.Builder(context, 16974374)
-                    builder.setTitle("Vehículos con restricción de circulación hoy")
-                    builder.setMessage("Este vehículo tiene restricción de circulación hoy")
-                    builder.setPositiveButton("Cerrar") { dialog, which ->
-                        dialog.dismiss()
-                    }
-                    builder.show()
-
-                }
+                ) alertshow()
             }
 
         }
 
 
+    }
+
+    fun alertshow(){
+        val builder: AlertDialog.Builder = AlertDialog.Builder(context, 16974374)
+        builder.setTitle("¡Ten Cuidado!")
+        builder.setMessage("Este vehículo tiene restricción de circulación hoy")
+        builder.setPositiveButton("Cerrar") { dialog, which ->
+            dialog.dismiss()
+        }
+        builder.show()
     }
 
 

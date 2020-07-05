@@ -223,37 +223,30 @@ class Finder : Fragment(), View.OnClickListener {
                 val plc = car.placa
                 if(p0.contains(plc) || p2.contains(plc) || p4.contains(plc)
                         || p6.contains(plc) || p8.contains(plc)
-                ){
-                    val builder: AlertDialog.Builder = AlertDialog.Builder(context, 16974374)
-                    builder.setTitle("¡Ten Cuidado!")
-                    builder.setMessage("Este vehículo tiene restricción de circulación hoy")
-                    builder.setPositiveButton("Cerrar") { dialog, which ->
-                        dialog.dismiss()
-                    }
-                    builder.show()
-
-                }
+                )alertshow()
             }
 
             1 -> {
                 val plc = car.placa
                 if(p1.contains(plc) || p3.contains(plc) || p5.contains(plc)
                         || p7.contains(plc) || p9.contains(plc)
-                ){
-                    val builder: AlertDialog.Builder = AlertDialog.Builder(context, 16974374)
-                    builder.setTitle("Vehículos con restricción de circulación hoy")
-                    builder.setMessage("Este vehículo tiene restricción de circulación hoy")
-                    builder.setPositiveButton("Cerrar") { dialog, which ->
-                        dialog.dismiss()
-                    }
-                    builder.show()
-
-                }
+                )alertshow()
             }
 
         }
 
 
     }
+
+    fun alertshow(){
+        val builder: AlertDialog.Builder = AlertDialog.Builder(context, 16974374)
+        builder.setTitle("¡Ten Cuidado!")
+        builder.setMessage("Este vehículo tiene restricción de circulación hoy")
+        builder.setPositiveButton("Cerrar") { dialog, which ->
+            dialog.dismiss()
+        }
+        builder.show()
+    }
+
 
 }

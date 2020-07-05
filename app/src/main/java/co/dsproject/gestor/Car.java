@@ -18,6 +18,26 @@ public class Car implements Comparable<Car> {
     private String poliza;
     private String impuesto;
 
+    public Car(String placa) {
+        this.placa = placa;
+    }
+
+    public Car() {
+    }
+
+    public Car(String owner, String placa, String marca, String linea, int modelo, String ultimo_mantenimiento, int frecuencia_mantenimiento, String soat, String rtm, String poliza, String impuesto) {
+        this.owner = owner;
+        this.placa = placa;
+        this.marca = marca;
+        this.linea = linea;
+        this.modelo = modelo;
+        this.ultimo_mantenimiento = ultimo_mantenimiento;
+        this.frecuencia_mantenimiento = frecuencia_mantenimiento;
+        this.soat = soat;
+        this.rtm = rtm;
+        this.poliza = poliza;
+        this.impuesto = impuesto;
+    }
 
     @Override
     public int compareTo(Car o) {
@@ -26,13 +46,17 @@ public class Car implements Comparable<Car> {
 
     @Override
     public boolean equals(@Nullable Object obj) {
-        return placa.equals((((Car) obj).placa));
+        if(Objects.hash((Car) obj) == Objects.hash(this)) {
+            return placa.equals((((Car) obj).placa));
+        }
+
+        return false;
     }
 
     @Override
     public int hashCode() {
         int hashcode = 0;
-        for(int i = 0; i<placa.length(); i++) {
+        for(int i = 0; i < placa.length(); i++) {
             hashcode = hashcode + placa.charAt(i);
         }
         return hashcode;

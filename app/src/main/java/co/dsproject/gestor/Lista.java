@@ -64,6 +64,20 @@ public class Lista<T extends Comparable<T>> {
         this.head = head;
     }
 
+    public T getItem(T object){
+        DoubleNode pointer = head;
+
+        while(pointer != null){
+            if(pointer.getData().equals(object)){
+                return (T) pointer.getData();
+            }else{
+                pointer = pointer.getNext();
+            }
+        }
+        return null;
+
+    }
+
     public DoubleNode<T> getHead() {
         return head;
     }

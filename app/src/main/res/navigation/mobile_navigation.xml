@@ -10,7 +10,12 @@
         android:name="co.dsproject.gestor.ui.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" >
-
+    </fragment>
+    <fragment
+        android:id="@+id/nav_history"
+        android:name="co.dsproject.gestor.ui.History"
+        android:label="Última actividad"
+        tools:layout="@layout/fragment_history" >
     </fragment>
     <fragment
         android:id="@+id/nav_cars"
