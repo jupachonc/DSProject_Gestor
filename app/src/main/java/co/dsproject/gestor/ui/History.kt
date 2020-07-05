@@ -26,7 +26,6 @@ import java.time.Month
 class History : Fragment(), View.OnClickListener {
 
     private var mainStack = Pila<TaskModel>()
-    private var auxStack = Pila<TaskModel>()
     private var mainTask: TaskModel? = null
     private lateinit var uid: String
     private lateinit var title: TextView
@@ -60,10 +59,7 @@ class History : Fragment(), View.OnClickListener {
                 override fun onSuccess(dataSnapshot: DataSnapshot?) {
                     for (snapshot in dataSnapshot!!.children) {
                         val task: TaskModel? = snapshot.getValue(TaskModel::class.java)
-                        auxStack.push(task)
-                    }
-                    while(!auxStack.empty()){
-                        mainStack.push(auxStack.pop())
+                        mainStack.push(task)
                     }
                     if(!mainStack.empty()) mainTask = mainStack.pop()
                     if(mainTask != null) updateUI()
